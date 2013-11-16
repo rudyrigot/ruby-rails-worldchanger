@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :set_ref
 
   def index
+    homepage_id = api.bookmarks["homepage"]
     begin
-      @documents = api.create_search_form("everything")
-                      .submit(@ref)
+      @document = PrismicService.get_document(homepage_id, api, @ref)
     rescue Prismic::SearchForm::RefNotFoundException => e
       render inline: e.message, status: :not_found
     end
