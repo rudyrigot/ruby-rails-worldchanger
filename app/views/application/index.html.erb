@@ -1,31 +1,57 @@
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
+<article id="homepage">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1><%= @document.fragments["headline"].as_html(link_resolver(params[:ref])).html_safe %></h1>
+      <p><%= @document.fragments["description"].as_html(link_resolver(params[:ref])).html_safe %></p>
+      <p><a class="btn btn-primary btn-lg" role="button"><%= @document.fragments["cta_label"].value %> &raquo;</a></p>
+    </div>
+  </div>
+
+
+  <div class="container section-title">
+    <%= @document.fragments["title_user_friendly"].as_html(link_resolver(params[:ref])).html_safe %>
+  </div>
+
   <div class="container">
-    <h1><%= @document.fragments["headline"].as_html(link_resolver(params[:ref])).html_safe %></h1>
-    <p><%= @document.fragments["description"].as_html(link_resolver(params[:ref])).html_safe %></p>
-    <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
-  </div>
-</div>
-
-<div class="container">
-  <!-- Example row of columns -->
-  <div class="row">
-    <div class="col-md-4">
-      <h2>Argument 1</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-      <h2>Argument 2</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-      <h2>Argument 3</h2>
-      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Argument 1</h3>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      </div>
+      <div class="col-md-4">
+        <h3>Argument 2</h3>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      </div>
+      <div class="col-md-4">
+        <h3>Argument 3</h3>
+        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+      </div>
     </div>
   </div>
 
-  <hr>
-</div>
+
+  <div class="container section-title">
+    <%= @document.fragments["title_design"].as_html(link_resolver(params[:ref])).html_safe %>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Argument 1</h3>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      </div>
+      <div class="col-md-4">
+        <h3>Argument 2</h3>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      </div>
+      <div class="col-md-4">
+        <h3>Argument 3</h3>
+        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+      </div>
+    </div>
+
+</article>
