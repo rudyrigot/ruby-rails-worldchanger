@@ -3,12 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :set_ref
 
   def index
-    homepage_id = api.bookmarks["homepage"]
-    begin
-      @document = PrismicService.get_document(homepage_id, api, @ref)
-    rescue Prismic::SearchForm::RefNotFoundException => e
-      render inline: e.message, status: :not_found
-    end
+  	@document = homepage
+  	set_title(@document)
   end
 
   def document
@@ -72,6 +68,31 @@ class ApplicationController < ActionController::Base
 
   def set_ref
     @ref = params[:ref].blank? ? api.master_ref.ref : params[:ref]
+  end
+
+  # gets either the first, highest title in the document, or if there's none, the homepage's headline.
+  def set_title(document)
+  	if document
+  		max_level = 6 # any title with a higher level kicks the current one out
+  		document.fragments.each do |_, fragment|
+  			if fragment.is_a? Prismic::Fragments::StructuredText
+  				fragment.blocks.each do |block|
+  					if block.is_a?(Prismic::Fragments::StructuredText::Block::Heading)
+  						if block.level < max_level
+  							@title = block.text
+  							max_level = block.level # new maximum
+  						end
+  					end
+  				end
+  			end
+  		end
+  	end
+  	# in case there's no title found (or no current document), get the homepage's title
+	@title ||= homepage.fragments["headline"].blocks[0].text
+  end
+
+  def homepage
+  	@homepage ||= PrismicService.get_document(api.bookmark("homepage"), api, @ref)
   end
 
   def api

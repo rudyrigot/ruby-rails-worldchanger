@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>StarterRubyRails</title>
+  <title>
+    <%= @homepage.fragments["product_name"].value %>
+    -
+    <%= @title %>
+  </title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -21,7 +25,7 @@
     </div>
     <div class="navbar-collapse collapse" id="top-navbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><a href="#">Home</a></li>
         <li><a href="#">Product tour</a></li>
         <li><a href="#">Pricing</a></li>
         <li><a href="#">FAQ</a></li>
