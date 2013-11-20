@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
   def index
   	@document = homepage
   	set_title(@document)
+    @user_friendly_arguments = api.create_search_form("everything", {"orderings" => "[my.argument.priority desc]"})
+                    .query(%([[:d = at(document.type, "argument")][:d = at(document.tags, ["userfriendly"])][:d = at(document.tags, ["featured"])]]))
+                    .submit(@ref)
+    # the second argument in the create_search_form methog is put here while waiting
+    # for the "orderings" field to be made available in /api
   end
 
   def document
