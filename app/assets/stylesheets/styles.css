@@ -4,7 +4,18 @@ body {
   padding-bottom: 20px;
 }
 
+/* Homepage */
 article#homepage .section-title {
 	margin-top: 60px;
 	margin-bottom: 10px;
+}
+article#homepage .argument-image {
+	text-align: center;
+}
+@media (max-width: 991px) and (min-width: 500px) {
+	article#homepage .argument-image {
+		float:left;
+		clear:left;
+		margin-right: 20px;
+	}
 }
