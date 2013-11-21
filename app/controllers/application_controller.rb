@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
     @user_friendly_arguments = api.create_search_form("everything", {"orderings" => "[my.argument.priority desc]"})
                     .query(%([[:d = at(document.type, "argument")][:d = at(document.tags, ["userfriendly"])][:d = at(document.tags, ["featured"])]]))
                     .submit(@ref)
+    @design_arguments = api.create_search_form("everything", {"orderings" => "[my.argument.priority desc]"})
+                    .query(%([[:d = at(document.type, "argument")][:d = at(document.tags, ["design"])][:d = at(document.tags, ["featured"])]]))
+                    .submit(@ref)
     # the second argument in the create_search_form methog is put here while waiting
     # for the "orderings" field to be made available in /api
   end
