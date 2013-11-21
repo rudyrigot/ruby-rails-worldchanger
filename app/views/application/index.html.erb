@@ -3,15 +3,15 @@
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
-      <h1><%= @document.fragments["headline"].as_html(link_resolver(params[:ref])).html_safe %></h1>
-      <p><%= @document.fragments["description"].as_html(link_resolver(params[:ref])).html_safe %></p>
+      <h1><%= @document.fragments["headline"].as_html(link_resolver(@ref)).html_safe %></h1>
+      <p><%= @document.fragments["description"].as_html(link_resolver(@ref)).html_safe %></p>
       <p><a class="btn btn-primary btn-lg" role="button"><%= @document.fragments["cta_label"].value %> &raquo;</a></p>
     </div>
   </div>
 
 
   <div class="container section-title">
-    <%= @document.fragments["title_user_friendly"].as_html(link_resolver(params[:ref])).html_safe %>
+    <%= @document.fragments["title_user_friendly"].as_html(link_resolver(@ref)).html_safe %>
   </div>
 
   <div class="container">
@@ -19,10 +19,10 @@
     <div class="row">
       <% @user_friendly_arguments.each do |argument| %>
         <div class="col-md-4">
-          <p class="argument-image"><%= argument.fragments["icon"].views[1].as_html(link_resolver(params[:ref])).html_safe %></p>
+          <p class="argument-image"><%= argument.fragments["icon"].views[1].as_html(link_resolver(@ref)).html_safe %></p>
           <%# .views[1] is to be replaced by .get_view['medium'] when the method is fixed in the gem  %>
           <h3><%= argument.fragments["catcher_title"].blocks[0].text %></h3>
-          <%= argument.fragments["catcher_description"].as_html(link_resolver(params[:ref])).html_safe %>
+          <%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>
         </div>
       <% end %>
     </div>
@@ -30,7 +30,7 @@
 
 
   <div class="container section-title">
-    <%= @document.fragments["title_design"].as_html(link_resolver(params[:ref])).html_safe %>
+    <%= @document.fragments["title_design"].as_html(link_resolver(@ref)).html_safe %>
   </div>
 
   <div class="container">
