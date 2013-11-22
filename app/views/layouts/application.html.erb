@@ -2,9 +2,8 @@
 <html>
 <head>
   <title>
-    <%= @homepage.fragments["product_name"].value %>
-    -
-    <%= @title %>
+    WorldChanger
+    <%= @title ? (" - " + @title) : "" %>
   </title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -21,12 +20,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to @homepage.fragments["product_name"].value, root_path, :class => "navbar-brand" %>
+      <%= link_to "WorldChanger", root_path, :class => "navbar-brand" %>
     </div>
     <div class="navbar-collapse collapse" id="top-navbar">
       <ul class="nav navbar-nav">
         <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path %></li>
-        <li><a href="#">Product tour</a></li>
+        <li <% if @document.try(:id) == api.bookmark('tour') %>class="active"<% end %>><%= link_to "Product tour", tour_path %></li>
         <li><a href="#">Pricing</a></li>
         <li><a href="#">FAQ</a></li>
         <li><a href="#">Support</a></li>
@@ -70,7 +69,7 @@
 
 <div class="container">
   <footer>
-    <p><%= @homepage.fragments["product_name"].value %> is an example website to be used freely on top of the <a href="http://prismic.io">prismic.io</a> writing-room and content query API.</p>
+    <p>WorldChanger is an example website to be used freely on top of the <a href="http://prismic.io">prismic.io</a> writing-room and content query API.</p>
     <p>
       <% if connected? %>
         <%= link_to signout_path do %>Sign out<% end %>

@@ -5,7 +5,7 @@
     <div class="container">
       <h1><%= @document.fragments["headline"].as_html(link_resolver(@ref)).html_safe %></h1>
       <p><%= @document.fragments["description"].as_html(link_resolver(@ref)).html_safe %></p>
-      <p><a class="btn btn-primary btn-lg" role="button"><%= @document.fragments["cta_label"].value %> &raquo;</a></p>
+      <p><%= link_to @document.fragments["cta_label"].value + " »", tour_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
     </div>
   </div>
 
