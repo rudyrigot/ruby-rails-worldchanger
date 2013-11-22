@@ -1,5 +1,17 @@
 <article id="tour">
 
-	
+	<div class="container">
+
+		<%= @document.fragments["title"].as_html(link_resolver(@ref)).html_safe %>
+		<%= @document.fragments["lede"].as_html(link_resolver(@ref)).html_safe %>
+
+		<% @arguments.each do |argument| %>
+			<h2 id="<%= argument.id %>">
+				<%= argument.fragments["catcher_title"].blocks[0].text %>
+			</h2>
+			<%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>
+		<% end %>
+		
+	</div>
 
 </article>
