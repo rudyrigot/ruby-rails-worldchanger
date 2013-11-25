@@ -2,14 +2,28 @@
 
 	<div class="container">
 
-		<%= @document.fragments["title"].as_html(link_resolver(@ref)).html_safe %>
-		<%= @document.fragments["lede"].as_html(link_resolver(@ref)).html_safe %>
+		<div class="page-title">
+			<%= @document.fragments["title"].as_html(link_resolver(@ref)).html_safe %>
+			<%= @document.fragments["lede"].as_html(link_resolver(@ref)).html_safe %>
+		</div>
 
-		<% @arguments.each do |argument| %>
-			<h2 id="<%= argument.id %>">
-				<%= argument.fragments["catcher_title"].blocks[0].text %>
-			</h2>
-			<%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>
+		<% @arguments.each_with_index do |argument, index| %>
+			<div class="row argument<%= " odd" if index % 2 != 0 %>">
+				<% if index % 2 != 0 %>
+					<div class="col-md-8 photo topphoto">
+						<%= render partial: "argumentimage", locals: {image: argument.fragments["photo"] } %>
+					</div>
+				<% end %>
+				<div class="col-md-4">
+					<h2 id="<%= argument.id %>">
+						<%= argument.fragments["catcher_title"].blocks[0].text %>
+					</h2>
+					<%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>
+				</div>
+				<div class="col-md-8 photo bottomphoto">
+					<%= render partial: "argumentimage", locals: {image: argument.fragments["photo"] } %>
+				</div>
+			</div>
 		<% end %>
 		
 	</div>

@@ -4,6 +4,12 @@ body {
   padding-bottom: 20px;
 }
 
+/* General CSS */
+.page-title {
+	margin-top: 50px;
+	margin-bottom: 80px;
+}
+
 /* Homepage */
 article#homepage .section-title {
 	margin-top: 60px;
@@ -17,5 +23,29 @@ article#homepage .argument-image {
 		float:left;
 		clear:left;
 		margin-right: 20px;
+	}
+}
+
+/* Tour */
+article#tour .argument {
+	margin-bottom: 50px;
+}
+article#tour .photo img {
+	max-width: 100%;
+}
+article#tour .odd .bottomphoto {
+	display: none;
+}
+@media (max-width: 991px) {
+	article#tour .odd .bottomphoto {
+		display: block;
+	}
+	article#tour .odd .topphoto {
+		display: none;
+	}
+}
+@media (max-width: 768px) {
+	article#tour .photo {
+		text-align: center;
 	}
 }

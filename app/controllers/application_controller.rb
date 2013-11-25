@@ -18,10 +18,7 @@ class ApplicationController < ActionController::Base
   def tour
     @document = PrismicService.get_document(api.bookmark("tour"), api, @ref)
     @title = first_title(@document) # will be suppressed with next gem
-    # @arguments = api.create_search_form("arguments", {"orderings" => "[my.argument.priority desc]"})
-    #                .submit(@ref)
-    @arguments = api.create_search_form("everything", {"orderings" => "[my.argument.priority desc]"})
-                    .query(%([[:d = at(document.type, "argument")]]))
+    @arguments = api.create_search_form("arguments", {"orderings" => "[my.argument.priority desc]"})
                     .submit(@ref)
     # the second argument in the create_search_form methog is put here while waiting
     # for the "orderings" field to be made available in /api
