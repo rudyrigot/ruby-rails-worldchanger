@@ -49,3 +49,7 @@ article#tour .odd .bottomphoto {
 		text-align: center;
 	}
 }
+
+article#pricing .plan {
+	text-align: center;
+}

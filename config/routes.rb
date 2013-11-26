@@ -59,7 +59,10 @@ StarterRubyRails::Application.routes.draw do
   root 'application#index'
 
   # # Product tour
-  get '/tour', to: 'application#tour', as: :tour
+  get '/tour' => 'application#tour'
+
+  # # Pricing
+  get '/pricing' => 'application#pricing'
 
   # # Document detail
   get '/document/:id/:slug', to: 'application#document', constraints: {id: /[-_a-zA-Z0-9]{16}/}, as: :document

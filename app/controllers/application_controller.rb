@@ -24,6 +24,15 @@ class ApplicationController < ActionController::Base
     # for the "orderings" field to be made available in /api
   end
 
+  def pricing
+    @document = PrismicService.get_document(api.bookmark("pricing"), api, @ref)
+    @title = first_title(@document) # will be suppressed with next gem
+    @plans = api.create_search_form("plans", {"orderings" => "[my.pricing.price]"})
+                    .submit(@ref)
+    # the second argument in the create_search_form methog is put here while waiting
+    # for the "orderings" field to be made available in /api
+  end
+
   def document
     id = params[:id]
     slug = params[:slug]

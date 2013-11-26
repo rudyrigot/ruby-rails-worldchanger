@@ -18,8 +18,11 @@ module PrismicHelper
         root_path
       when "article"
         tour_path if doc.id == api.bookmark("tour")
+        pricing_path if doc.id == api.bookmark("pricing")
       when "argument"
         tour_path + "#" + doc.id
+      when "pricing"
+        pricing_path + "#" + doc.id
       else
         # I'm leaving this here as long as I'm not done developing all the templates, it gives me a default one
         document_path(id: doc.id, slug: doc.slug)

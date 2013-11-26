@@ -26,9 +26,8 @@
       <ul class="nav navbar-nav">
         <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path %></li>
         <li <% if @document.try(:id) == api.bookmark('tour') %>class="active"<% end %>><%= link_to "Product tour", tour_path %></li>
-        <li><a href="#">Pricing</a></li>
+        <li <% if @document.try(:id) == api.bookmark('pricing') %>class="active"<% end %>><%= link_to "Pricing", pricing_path %></li>
         <li><a href="#">FAQ</a></li>
-        <li><a href="#">Support</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Blog</a></li>
