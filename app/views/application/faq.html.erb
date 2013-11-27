@@ -1,0 +1,33 @@
+<article id="faq">
+
+	<div class="container">
+
+		<div class="page-title">
+			<%= @document.fragments["title"].as_html(link_resolver(@ref)).html_safe %>
+			<%= @document.fragments["lede"].as_html(link_resolver(@ref)).html_safe %>
+		</div>
+
+
+		<div class="panel-group" id="accordion">
+			<% @questions.each do |question| %>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#<%= question.id %>">
+								<%= question.fragments["question"].blocks[0].text %>
+							</a>
+						</h4>
+					</div>
+					<div id="<%= question.id %>" class="panel-collapse collapse">
+						<div class="panel-body">
+							<%= question.fragments["answer"].as_html(link_resolver(@ref)).html_safe %>
+						</div>
+					</div>
+
+				</div>
+			<% end %>
+		</div>
+		
+	</div>
+
+</article>

@@ -40,6 +40,13 @@ class ApplicationController < ActionController::Base
                     .submit(@ref)
   end
 
+  def faq
+    @document = PrismicService.get_document(api.bookmark("faq"), api, @ref)
+    @title = first_title(@document) # will be suppressed with next gem
+    @questions = api.create_search_form("questions", {"orderings" => "[my.faq.priority desc]"})
+                    .submit(@ref)
+  end
+
   def document
     id = params[:id]
     slug = params[:slug]

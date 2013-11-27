@@ -14,3 +14,16 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+;(function($){
+
+	/* On the FAQ page, opens the right accordion item if the ID of the question is passed as the hash */
+	/* This can only be done through the front-end, as the hash is never passed to the server. */
+	$(document).ready(function(){
+		if ($('article#faq').length != 0) {
+			var hash = window.location.hash.substring(1);
+			$('#'+hash).addClass("in").css('height', 'auto');
+		}
+	});
+
+}( jQuery ));

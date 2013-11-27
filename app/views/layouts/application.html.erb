@@ -27,7 +27,7 @@
         <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path %></li>
         <li <% if @document.try(:id) == api.bookmark('tour') %>class="active"<% end %>><%= link_to "Product tour", tour_path %></li>
         <li <% if @document.try(:id) == api.bookmark('pricing') %>class="active"<% end %>><%= link_to "Pricing", pricing_path %></li>
-        <li><a href="#">FAQ</a></li>
+        <li <% if @document.try(:id) == api.bookmark('faq') %>class="active"<% end %>><%= link_to "FAQ", faq_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Blog</a></li>
@@ -67,7 +67,7 @@
 <hr>
 
 <div class="container">
-  <footer>
+  <footer id="footer">
     <p>WorldChanger is an example website to be used freely on top of the <a href="http://prismic.io">prismic.io</a> writing-room and content query API.</p>
     <p>
       <% if connected? %>
