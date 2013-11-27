@@ -64,3 +64,20 @@ article#pricing .planframe {
 	border-radius: 40px;
 	box-shadow: 5px 5px 5px #888888;
 }
+
+/* About us */
+article#about .staff {
+	text-align: center;
+}
+article#about .title {
+	font-style: italic;
+	color: #888888;
+}
+@media (max-width: 991px) {
+	article#about .photo {
+		float: left;
+	}
+	article#about .staff {
+		clear: left;
+	}
+}

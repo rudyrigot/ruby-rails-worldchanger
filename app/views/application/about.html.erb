@@ -1,0 +1,34 @@
+<article id="about">
+
+	<div class="container">
+
+		<div class="page-title">
+			<%= @document.fragments["title"].as_html(link_resolver(@ref)).html_safe %>
+			<%= @document.fragments["lede"].as_html(link_resolver(@ref)).html_safe %>
+		</div>
+
+
+		<div class="row">
+			<% @staff.each do |staff_member| %>
+
+				<div class="col-md-3 staff">
+					<p class="photo">
+						<span data-picture>
+							<span data-src="<%= staff_member.fragments["photo"].views[0].url %>"></span>
+						    <span data-src="<%= staff_member.fragments["photo"].views[1].url %>" data-media="(max-width: 991px)"></span>
+						    <noscript>
+						        <img src="<%= staff_member.fragments["photo"].views[1].url %>">
+							</noscript>
+						</span>
+					</p>
+					<h3><%= staff_member.fragments["fullname"].blocks[0].text %></h3>
+					<p class="title"><%= staff_member.fragments["title"].value %>
+					<p><%= staff_member.fragments["description"].as_html(link_resolver(@ref)).html_safe %></p>
+				</div>
+
+			<% end %>
+		</div>
+		
+	</div>
+
+</article>

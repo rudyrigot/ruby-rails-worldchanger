@@ -33,6 +33,13 @@ class ApplicationController < ActionController::Base
     # for the "orderings" field to be made available in /api
   end
 
+  def about
+  	@document = PrismicService.get_document(api.bookmark("about"), api, @ref)
+    @title = first_title(@document) # will be suppressed with next gem
+  	@staff = api.create_search_form("staff", {"orderings" => "[my.author.level]"})
+                    .submit(@ref)
+  end
+
   def document
     id = params[:id]
     slug = params[:slug]

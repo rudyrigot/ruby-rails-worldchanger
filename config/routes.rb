@@ -64,6 +64,9 @@ StarterRubyRails::Application.routes.draw do
   # # Pricing
   get '/pricing' => 'application#pricing'
 
+  # # About
+  get '/about' => 'application#about'
+
   # # Document detail
   get '/document/:id/:slug', to: 'application#document', constraints: {id: /[-_a-zA-Z0-9]{16}/}, as: :document
 
