@@ -1,10 +1,8 @@
-<span data-picture data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+<span data-picture>
 	<span data-src="<%= image.views[2].url %>"></span>
     <span data-src="<%= image.views[1].url %>" data-media="(min-width: 767px)"></span>
     <span data-src="<%= image.views[0].url %>" data-media="(min-width: 992px)"></span>
-
-    <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
     <noscript>
-        <img src="external/imgs/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+        <img src="<%= image.views[2].url %>">
 	</noscript>
 </span>
