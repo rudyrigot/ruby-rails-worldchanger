@@ -24,6 +24,11 @@ class ApplicationController < ActionController::Base
     @design_arguments = api.create_search_form("arguments", {"orderings" => "[my.argument.priority desc]"})
                     .query(%([[:d = at(document.tags, ["design"])][:d = at(document.tags, ["featured"])]]))
                     .submit(@ref)
+    @minimum_price = api.create_search_form("plans", {"orderings" => "[my.pricing.price]"}).submit(@ref)[0]
+                    .fragments['price'].value.to_i
+    @questions = api.create_search_form("questions", {"orderings" => "[my.faq.priority desc]"})
+                    .query(%([[:d = at(document.tags, ["featured"])]]))
+                    .submit(@ref)
   end
 
   def tour

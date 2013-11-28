@@ -19,12 +19,10 @@
   </div>
 
   <div class="container">
-    <!-- Example row of columns -->
     <div class="row">
       <% @user_friendly_arguments.each do |argument| %>
         <div class="col-md-4">
           <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@ref)).html_safe %></p>
-          <%# .views[1] is to be replaced by .get_view['medium'] when the method is fixed in the gem  %>
           <h3><%= argument.fragments["catcher_title"].blocks[0].text %></h3>
           <%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>
         </div>
@@ -38,14 +36,32 @@
   </div>
 
   <div class="container">
-    <!-- Example row of columns -->
     <div class="row">
       <% @design_arguments.each do |argument| %>
         <div class="col-md-4">
           <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@ref)).html_safe %></p>
-          <%# .views[1] is to be replaced by .get_view['medium'] when the method is fixed in the gem  %>
           <h3><%= argument.fragments["catcher_title"].blocks[0].text %></h3>
           <%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="well" id="pricewell">
+      <p>We have plans from <strong>$<%= @minimum_price %>/mo</strong></p>
+      <p><%= link_to "Check them out »", pricing_path, :class => "btn btn-primary", :role => "button" %></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Some usual questions we get</h2>
+    <div class="row">
+      <% @questions.each do |question| %>
+        <div class="col-md-3">
+          <h4><%= question.fragments['question'].blocks[0].text %></h4>
+          <%= question.fragments["short_answer"].as_html(link_resolver(@ref)).html_safe %>
+          <%= link_to "See more »", link_resolver(@ref).link_to(Prismic::Fragments::DocumentLink.new(question.id, question.type, question.tags, question.slug, false)) %>
         </div>
       <% end %>
     </div>

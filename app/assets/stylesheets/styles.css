@@ -25,6 +25,17 @@ article#homepage .argument-image {
 		margin-right: 20px;
 	}
 }
+article#homepage #pricewell {
+	text-align: center;
+	margin: 100px 0 80px;
+	font-size: 1.5em;
+}
+@media (min-width: 500px) {
+	article#homepage #pricewell {
+		margin-left: 50px;
+		margin-right: 50px;
+	}
+}
 
 /* Tour */
 article#tour .argument {
