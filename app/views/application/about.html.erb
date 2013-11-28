@@ -14,10 +14,10 @@
 				<div class="col-md-3 staff" id="<%= staff_member.id %>">
 					<p class="photo">
 						<span data-picture>
-							<span data-src="<%= staff_member.fragments["photo"].views[0].url %>"></span>
-						    <span data-src="<%= staff_member.fragments["photo"].views[1].url %>" data-media="(max-width: 991px)"></span>
+							<span data-src="<%= staff_member.fragments["photo"].get_view("large").url %>"></span>
+						    <span data-src="<%= staff_member.fragments["photo"].get_view("icon").url %>" data-media="(max-width: 991px)"></span>
 						    <noscript>
-						        <img src="<%= staff_member.fragments["photo"].views[1].url %>">
+						        <img src="<%= staff_member.fragments["photo"].get_view("icon").url %>">
 							</noscript>
 						</span>
 					</p>

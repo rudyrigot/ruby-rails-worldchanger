@@ -23,7 +23,7 @@
     <div class="row">
       <% @user_friendly_arguments.each do |argument| %>
         <div class="col-md-4">
-          <p class="argument-image"><%= argument.fragments["icon"].views[1].as_html(link_resolver(@ref)).html_safe %></p>
+          <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@ref)).html_safe %></p>
           <%# .views[1] is to be replaced by .get_view['medium'] when the method is fixed in the gem  %>
           <h3><%= argument.fragments["catcher_title"].blocks[0].text %></h3>
           <%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>
@@ -42,7 +42,7 @@
     <div class="row">
       <% @design_arguments.each do |argument| %>
         <div class="col-md-4">
-          <p class="argument-image"><%= argument.fragments["icon"].views[1].as_html(link_resolver(@ref)).html_safe %></p>
+          <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@ref)).html_safe %></p>
           <%# .views[1] is to be replaced by .get_view['medium'] when the method is fixed in the gem  %>
           <h3><%= argument.fragments["catcher_title"].blocks[0].text %></h3>
           <%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>

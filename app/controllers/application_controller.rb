@@ -2,47 +2,50 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_ref
 
+=begin
+	In this controller, orderings are passed as a second parameter of create_search_form.
+	This is a tweak while waiting for the orderings to be officially added in the API forms,
+	you should NEVER do that in production code, as it is a hack and is not guaranteed
+	to work forever.
+	Rather, the proper method will be to pass the orderings in the `ordering` method
+	to apply on the search form, that doesn't exist yet. It will look like this:
+
+	api.create_search_form("arguments")
+       .query(%([[:d = at(document.tags, ["userfriendly"])][:d = at(document.tags, ["featured"])]]))
+       .orderings("[my.argument.priority desc]")
+       .submit(@ref)
+=end
+
   def index
   	@document = PrismicService.get_document(api.bookmark("homepage"), api, @ref)
-    @title = first_title(@document) # will be suppressed with next gem
-    @user_friendly_arguments = api.create_search_form("everything", {"orderings" => "[my.argument.priority desc]"})
-                    .query(%([[:d = at(document.type, "argument")][:d = at(document.tags, ["userfriendly"])][:d = at(document.tags, ["featured"])]]))
+    @user_friendly_arguments = api.create_search_form("arguments", {"orderings" => "[my.argument.priority desc]"})
+                    .query(%([[:d = at(document.tags, ["userfriendly"])][:d = at(document.tags, ["featured"])]]))
                     .submit(@ref)
-    @design_arguments = api.create_search_form("everything", {"orderings" => "[my.argument.priority desc]"})
-                    .query(%([[:d = at(document.type, "argument")][:d = at(document.tags, ["design"])][:d = at(document.tags, ["featured"])]]))
+    @design_arguments = api.create_search_form("arguments", {"orderings" => "[my.argument.priority desc]"})
+                    .query(%([[:d = at(document.tags, ["design"])][:d = at(document.tags, ["featured"])]]))
                     .submit(@ref)
-    # the second argument in the create_search_form methog is put here while waiting
-    # for the "orderings" field to be made available in /api
   end
 
   def tour
     @document = PrismicService.get_document(api.bookmark("tour"), api, @ref)
-    @title = first_title(@document) # will be suppressed with next gem
     @arguments = api.create_search_form("arguments", {"orderings" => "[my.argument.priority desc]"})
                     .submit(@ref)
-    # the second argument in the create_search_form methog is put here while waiting
-    # for the "orderings" field to be made available in /api
   end
 
   def pricing
     @document = PrismicService.get_document(api.bookmark("pricing"), api, @ref)
-    @title = first_title(@document) # will be suppressed with next gem
     @plans = api.create_search_form("plans", {"orderings" => "[my.pricing.price]"})
                     .submit(@ref)
-    # the second argument in the create_search_form methog is put here while waiting
-    # for the "orderings" field to be made available in /api
   end
 
   def about
   	@document = PrismicService.get_document(api.bookmark("about"), api, @ref)
-    @title = first_title(@document) # will be suppressed with next gem
   	@staff = api.create_search_form("staff", {"orderings" => "[my.author.level]"})
                     .submit(@ref)
   end
 
   def faq
     @document = PrismicService.get_document(api.bookmark("faq"), api, @ref)
-    @title = first_title(@document) # will be suppressed with next gem
     @questions = api.create_search_form("questions", {"orderings" => "[my.faq.priority desc]"})
                     .submit(@ref)
   end
@@ -68,6 +71,8 @@ class ApplicationController < ActionController::Base
                     .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
                     .submit(@ref)
   end
+
+  # OAuth pages controllers
 
   def get_callback_url
     callback_url(redirect_uri: request.env['referer'])
@@ -107,33 +112,8 @@ class ApplicationController < ActionController::Base
   private
 
   # Before_action
-
   def set_ref
     @ref = params[:ref].blank? ? api.master_ref.ref : params[:ref]
-  end
-
-  # Helper methods
-
-  # gets either the first, highest title in the document, or if there's none, the homepage's headline.
-  # to be suppressed when the mext RubyGem makes it through with the Document::first_title method
-  def first_title(document)
-    title = false
-  	if document
-  		max_level = 6 # any title with a higher level kicks the current one out
-  		document.fragments.each do |_, fragment|
-  			if fragment.is_a? Prismic::Fragments::StructuredText
-  				fragment.blocks.each do |block|
-  					if block.is_a?(Prismic::Fragments::StructuredText::Block::Heading)
-  						if block.level < max_level
-  							title = block.text
-  							max_level = block.level # new maximum
-  						end
-  					end
-  				end
-  			end
-  		end
-  	end
-	 title
   end
 
   def api
