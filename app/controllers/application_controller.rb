@@ -123,7 +123,14 @@ class ApplicationController < ActionController::Base
 
   def api
     @access_token = session['ACCESS_TOKEN']
-    @api ||= PrismicService.init_api(@access_token)
+    begin
+      @api ||= PrismicService.init_api(@access_token)
+    rescue Prismic::API::PrismicWSConnectionError
+      # In case there is a connection error, it could come from an expired token,
+      # so let's try it again after discarding the access token
+      session['ACCESS_TOKEN'] = @access_token = nil
+      @api ||= PrismicService.init_api(@access_token)
+    end
   end
 
 end
