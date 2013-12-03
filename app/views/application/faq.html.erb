@@ -8,25 +8,7 @@
 		</div>
 
 
-		<div class="panel-group" id="accordion">
-			<% @questions.each do |question| %>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#<%= question.id %>">
-								<%= question.fragments["question"].blocks[0].text %>
-							</a>
-						</h4>
-					</div>
-					<div id="<%= question.id %>" class="panel-collapse collapse">
-						<div class="panel-body">
-							<%= question.fragments["answer"].as_html(link_resolver(@ref)).html_safe %>
-						</div>
-					</div>
-
-				</div>
-			<% end %>
-		</div>
+		<%= render partial: "faqcarrousel", locals: { questions: @questions } %>
 		
 	</div>
 

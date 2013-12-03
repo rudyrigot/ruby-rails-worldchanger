@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
     @plans = api.create_search_form("plans")
                     .set("orderings", "[my.pricing.price]")
                     .submit(@ref)
+    @questions = api.create_search_form("questions")
+                    .query(%([[:d = any(document.tags, ["pricing"])]]))
+                    .set("orderings", "[my.faq.priority desc]")
+                    .submit(@ref)
   end
 
   def about
