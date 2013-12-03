@@ -49,13 +49,13 @@
 
   <div class="container">
     <div class="well" id="pricewell">
-      <p>We have plans from <strong>$<%= @minimum_price %>/mo</strong></p>
-      <p><%= link_to "Check them out »", pricing_path, :class => "btn btn-primary", :role => "button" %></p>
+      <p><%= @document.fragments['pricing_label'].value %> <strong>$<%= @minimum_price %>/mo</strong></p>
+      <p><%= link_to @document.fragments['pricing_button_label'].value+" »", pricing_path, :class => "btn btn-primary", :role => "button" %></p>
     </div>
   </div>
 
   <div class="container">
-    <h2>Some usual questions we get</h2>
+    <%= @document.fragments['title_faq'].as_html(link_resolver(@ref)).html_safe %>
     <div class="row">
       <% @questions.each do |question| %>
         <div class="col-md-3">
