@@ -61,7 +61,7 @@
         <div class="col-md-3">
           <h4><%= question.fragments['question'].blocks[0].text %></h4>
           <%= question.fragments["short_answer"].as_html(link_resolver(@ref)).html_safe %>
-          <%= link_to "See more »", link_resolver(@ref).link_to(Prismic::Fragments::DocumentLink.new(question.id, question.type, question.tags, question.slug, false)) %>
+          <%= link_to question.fragments["link_label"].value+" »", link_resolver(@ref).link_to(Prismic::Fragments::DocumentLink.new(question.id, question.type, question.tags, question.slug, false)) %>
         </div>
       <% end %>
     </div>
