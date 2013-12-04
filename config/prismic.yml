@@ -5,3 +5,5 @@ url: https://worldchanger.prismic.io/api
 # OAuth2 configuration
 client_id: "UoVRQ0nM08sENOPw"
 client_secret: "5b9350aebc02a575c9e3881e9e72d568"
+
+blog_categories: ['Announcements', 'Life at WorldChanger', 'About changing the world']

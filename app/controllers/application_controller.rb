@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_ref
+  before_action :set_blog_categories, only: [:blog, :blogcategory, :blogpost, :blogsearch]
 
   def index
   	@document = PrismicService.get_document(api.bookmark("homepage"), api, @ref)
@@ -53,7 +54,30 @@ class ApplicationController < ActionController::Base
                     .submit(@ref)
   end
 
-  def document
+  def blog
+    @documents = api.create_search_form("blog")
+                    .set("orderings", "[my.blog.date desc]")
+                    .submit(@ref)
+    render :bloglist
+  end
+
+  def blogcategory
+    @documents = api.create_search_form("blog")
+                    .query(%([[:d = at(my.blog.category, "#{params[:slug]}")]]))
+                    .set("orderings", "[my.blog.date desc]")
+                    .submit(@ref)
+    render :bloglist
+  end
+
+  def blogsearch
+    @documents = api.create_search_form("blog")
+                    .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
+                    .set("orderings", "[my.blog.date desc]")
+                    .submit(@ref)
+    render :bloglist
+  end
+
+  def blogpost
     id = params[:id]
     slug = params[:slug]
 
@@ -61,18 +85,12 @@ class ApplicationController < ActionController::Base
     if @document.nil?
       render inline: "Document not found", status: :not_found
     elsif slug == @document.slug
-      @document
-    elsif document.slugs.contains(slug)
-      redirect_to document_application_path(id, slug), status: :moved_permanently
+      @author = PrismicService.get_document(@document.fragments['author'].id, api, @ref)
+    elsif @document.slugs.include?(slug)
+      redirect_to document_path(id, @document.slug), status: :moved_permanently
     else
       render inline: "Document not found", status: :not_found
     end
-  end
-
-  def search
-    @documents = api.create_search_form("everything")
-                    .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
-                    .submit(@ref)
   end
 
   # OAuth pages controllers
@@ -117,6 +135,10 @@ class ApplicationController < ActionController::Base
   # Before_action
   def set_ref
     @ref = params[:ref].blank? ? api.master_ref.ref : params[:ref]
+  end
+
+  def set_blog_categories
+    @blog_categories = PrismicService.config('blog_categories')
   end
 
   def api

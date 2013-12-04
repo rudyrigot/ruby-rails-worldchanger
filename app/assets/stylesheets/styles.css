@@ -92,3 +92,53 @@ article#about .title {
 		clear: left;
 	}
 }
+
+/* Blog nav */
+#blog-nav {
+	margin-bottom: 50px;
+}
+#blog-nav .blog-tags,
+#blog-nav .blog-search {
+	margin-top: 20px;
+	text-align: right;
+}
+#blog-nav .blog-tags label {
+	margin-right: 10px;
+	font-weight: normal;
+	font-style: italic;
+}
+
+/* Blog list */
+#blog-list .container .blog-post:first-child .image,
+#blog-list .container .blog-post:first-child .preview {
+	border: 0;
+}
+#blog-list .image {
+	text-align: center;
+	border-top: 1px solid #eeeeee;
+}
+#blog-list .preview {
+	border-top: 1px solid #eeeeee;
+}
+#blog-list .preview .date {
+	font-style: italic;
+}
+#blog-list .blog-post {
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+#blog-list a {
+	color: black;
+}
+#blog-list .empty {
+	text-align: center;
+	margin-bottom: 100px;
+	margin-top: 50px;
+}
+#blog-list .empty h3 {
+	margin-bottom: 30px;
+}
+#blog-list .empty form {
+	max-width: 300px;
+	margin: auto;
+}

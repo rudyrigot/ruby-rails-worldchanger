@@ -70,11 +70,15 @@ StarterRubyRails::Application.routes.draw do
   # # FAQ
   get '/faq' => 'application#faq'
 
-  # # Document detail
-  get '/document/:id/:slug', to: 'application#document', constraints: {id: /[-_a-zA-Z0-9]{16}/}, as: :document
+  # # Blog lists
+  get '/blog' => 'application#blog'
+  get '/blog/category/:slug' => 'application#blogcategory', as: :blog_category
 
-  # # Basic search
-  get '/search', to: 'application#search', as: :search
+    # # Basic search
+  get '/blog/search', to: 'application#blogsearch', as: :blog_search
+
+  # # Blog post
+  get '/blog/:id/:slug', to: 'application#blogpost', constraints: {id: /[-_a-zA-Z0-9]{16}/}, as: :blogpost
 
   # # Prismic.io OAuth
   # GET     /signin                                     controllers.Prismic.signin

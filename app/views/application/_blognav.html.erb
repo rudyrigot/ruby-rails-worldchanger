@@ -1,0 +1,13 @@
+<div id="blog-nav" class="row">
+	<div class="col-md-9 blog-tags">
+		<label>Filter by category</label>
+		<div class="btn-group">
+			<% @blog_categories.each do |category| %>
+				<%= link_to category, blog_category_path(category), :class => 'btn btn-default'+(category == params[:slug] ? ' active' : '') %>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-3 blog-search">
+		<%= render partial: "blogsearch" %>
+	</div>
+</div>

@@ -29,6 +29,8 @@ module PrismicHelper
         about_path + "#" + doc.id
       when "faq"
         faq_path + "#" + doc.id
+      when "blog"
+        blogpost_path(doc.id, doc.slug)
       else
         # I'm leaving this here as long as I'm not done developing all the templates, it gives me a default one
         document_path(id: doc.id, slug: doc.slug)

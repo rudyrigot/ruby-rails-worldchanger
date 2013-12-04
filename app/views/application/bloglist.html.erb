@@ -1,0 +1,37 @@
+<div class="container">
+	<%= render partial: "blognav" %>
+</div>
+
+<article id="blog-list">
+
+	<div class="container">
+
+		<% if @documents.empty? %>
+			<div class="empty">
+				<h3>No document matches your search. Search again?</h3>
+				<%= render partial: "blogsearch" %>
+			</div>
+		<% end %>
+
+		<% @documents.each do |document| %>
+			<a href="<%= blogpost_path(document.id, document.slug) %>" class="row blog-post">
+				<div class="col-md-3 col-md-offset-2 image">
+					<p>
+						<%= document.fragments['image'].get_view('medium').as_html(link_resolver(@ref)).html_safe %>
+					</p>
+				</div>
+				<div class="col-md-5 preview">
+					<h2>
+						<%= document.first_title %>
+					</h2>
+					<p class="date">
+						On <%= document.fragments['date'].value.strftime("%b %-d %Y") %>
+					</p>
+					<%= document.fragments['shortlede'].as_html(link_resolver(@ref)).html_safe %>
+				</div>
+			</a>
+		<% end %>
+
+	</div>
+
+</article>
