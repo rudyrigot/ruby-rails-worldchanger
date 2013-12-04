@@ -1,8 +1,51 @@
+<div class="container">
+	<%= render partial: "blognav" %>
+</div>
+
 <article id="blogpost">
 
 	<div class="container">
 
-		<%= display_doc @author, @ref %>
+		<p class="image">
+			<%= image_tag @document.fragments['image'].get_view('large').url %>
+		</p>
+
+		<div class="metainformation well">
+			<p class="authorimage">
+				<img src="<%= @author.fragments['photo'].get_view('icon').url %>">
+			</p>
+			Published on <%= @document.fragments['date'].value.strftime("%b %-d %Y") %>
+			<br>
+			by
+			<% if @author.tags.include?("staff") %>
+				<%= link_to @author.fragments['fullname'].blocks[0].text, about_path + "#" + @author.id %>,
+			<% else %>
+				<%= @author.fragments['fullname'].blocks[0].text %>,
+			<% end %>
+			<br>
+			<%= @author.fragments['title'].value %>,
+			<%= @author.fragments['company'].value %>
+		</div>
+
+		<%= @document.fragments['body'].as_html(link_resolver(@ref)).html_safe %>
+
+		<% if @document.fragments['allow_comments'].value.downcase == "yes" %>
+			<div id="disqus_thread"></div>
+		    <script type="text/javascript">
+		        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		        var disqus_shortname = 'worldchanger'; // required: replace example with your forum shortname
+
+		        /* * * DON'T EDIT BELOW THIS LINE * * */
+		        (function() {
+		            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		        })();
+		    </script>
+		    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	    <% end %>
+	    
 
 	</div>
 

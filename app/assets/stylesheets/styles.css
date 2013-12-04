@@ -102,6 +102,9 @@ article#about .title {
 	margin-top: 20px;
 	text-align: right;
 }
+#blog-nav .dropdown {
+	margin-top: 20px;
+}
 #blog-nav .blog-tags label {
 	margin-right: 10px;
 	font-weight: normal;
@@ -141,4 +144,41 @@ article#about .title {
 #blog-list .empty form {
 	max-width: 300px;
 	margin: auto;
+}
+
+/* Blog post */
+#blogpost .metainformation {
+	margin: 30px;
+	float: right;
+	font-style: italic;
+	min-height: 140px;
+}
+@media (max-width: 991px) {
+	#blogpost .metainformation {
+		float: none;
+	}
+}
+#blogpost .metainformation .authorimage {
+	float:left;
+	margin-right: 20px;
+	text-align: center;
+}
+@media (max-width: 500px) {
+	#blogpost .metainformation .authorimage {
+		float: none;
+		margin: 0;
+	}
+	#blogpost .metainformation .authorimage img {
+		height: 50px;
+		width: 50px;
+	}
+	#blogpost .metainformation {
+		text-align: center;
+	}
+}
+#blogpost p.image {
+	text-align: center;
+}
+#blogpost p.image img {
+	max-width: 100%;
 }

@@ -85,9 +85,21 @@ class ApplicationController < ActionController::Base
     if @document.nil?
       render inline: "Document not found", status: :not_found
     elsif slug == @document.slug
+
+      # Retrieving the author in order to display their full name and title
       @author = PrismicService.get_document(@document.fragments['author'].id, api, @ref)
+
+      # Overriding the way images in structured text are rendered into HTML.
+      # The problem was that they are rendered with "width" and "height", making them non-flexible.
+      # Also, the overriding method nests them in a <p>, in order to be able to center them.
+      @document.fragments['body'].blocks.each do |block|
+        if block.is_a? Prismic::Fragments::StructuredText::Block::Image
+          def block.as_html(linkresolver = nil); %(<p class="image"><img src=") + self.url + %("></p>); end
+        end
+      end
+
     elsif @document.slugs.include?(slug)
-      redirect_to document_path(id, @document.slug), status: :moved_permanently
+      redirect_to blogpost_path(id, @document.slug), status: :moved_permanently
     else
       render inline: "Document not found", status: :not_found
     end
