@@ -36,6 +36,11 @@ article#homepage #pricewell {
 		margin-right: 50px;
 	}
 }
+@media (max-width: 767px) {
+	article#homepage .jumbotron p {
+		font-size: 0.9em;
+	}
+}
 
 /* Tour */
 article#tour .argument {
