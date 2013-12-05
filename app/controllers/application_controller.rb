@@ -83,7 +83,7 @@ class ApplicationController < ActionController::Base
 
     @document = PrismicService.get_document(id, api, @ref)
     if @document.nil?
-      render inline: "Document not found", status: :not_found
+      render inline: "Document not found", status: :not_found, file: "#{Rails.root}/public/404", layout: false
     elsif slug == @document.slug
 
       # Retrieving the author in order to display their full name and title
@@ -101,7 +101,7 @@ class ApplicationController < ActionController::Base
     elsif @document.slugs.include?(slug)
       redirect_to blogpost_path(id, @document.slug), status: :moved_permanently
     else
-      render inline: "Document not found", status: :not_found
+      render inline: "Document not found", status: :not_found, file: "#{Rails.root}/public/404", layout: false
     end
   end
 
