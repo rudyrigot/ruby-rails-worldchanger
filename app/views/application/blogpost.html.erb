@@ -23,11 +23,19 @@
 				<%= @author.fragments['fullname'].blocks[0].text %>,
 			<% end %>
 			<br>
-			<%= @author.fragments['title'].value %>,
-			<%= @author.fragments['company'].value %>
+			<%= @author.fragments['title'].value if @author.fragments['title'] %><%= ", " + @author.fragments['company'].value if @author.fragments['company'] %>
 		</div>
 
 		<%= @document.fragments['body'].as_html(link_resolver(@ref)).html_safe %>
+
+		<% if @relatedposts && !@relatedposts.empty? %>
+			<h4>Some related posts from our blog</h4>
+			<ul>
+				<% @relatedposts.each do |post| %>
+					<li><%= link_to post.first_title, link_resolver(@ref).link_to(Prismic::Fragments::DocumentLink.new(post.id, post.type, nil, post.slug, false)) %></li>
+				<% end %>
+			</ul>
+		<% end %>
 
 		<% if @document.fragments['allow_comments'].value.downcase == "yes" %>
 			<div id="disqus_thread"></div>

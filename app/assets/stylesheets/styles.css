@@ -112,16 +112,26 @@ article#about .title {
 }
 
 /* Blog list */
+#blog-list .container {
+	margin-bottom: 100px;
+}
+#blog-list .image {
+	text-align: center;
+}
+#blog-list .preview,
+#blog-list .image {
+	border-top: 1px solid #eeeeee;
+	padding-top: 30px;
+}
 #blog-list .container .blog-post:first-child .image,
 #blog-list .container .blog-post:first-child .preview {
 	border: 0;
 }
-#blog-list .image {
-	text-align: center;
-	border-top: 1px solid #eeeeee;
-}
-#blog-list .preview {
-	border-top: 1px solid #eeeeee;
+@media (max-width: 991px) {
+	#blog-list .preview {
+		border : 0;
+		padding-top: 0;
+	}
 }
 #blog-list .preview .date {
 	font-style: italic;

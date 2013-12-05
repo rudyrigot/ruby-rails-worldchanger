@@ -98,6 +98,16 @@ class ApplicationController < ActionController::Base
         end
       end
 
+      # Retieving the potential related posts
+      if @document.fragments['relatedpost']
+        @relatedposts = @document.fragments['relatedpost'].fragments.select do |doclink|
+          !doclink.broken? # suppressing if broken
+        end
+        @relatedposts.map! do |doclink|
+          PrismicService.get_document(doclink.id, api, @ref) #replacing doclinks with documents
+        end
+      end
+
     elsif @document.slugs.include?(slug)
       redirect_to blogpost_path(id, @document.slug), status: :moved_permanently
     else
