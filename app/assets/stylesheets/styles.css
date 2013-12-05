@@ -49,17 +49,6 @@ article#tour .argument {
 article#tour .photo img {
 	max-width: 100%;
 }
-article#tour .odd .bottomphoto {
-	display: none;
-}
-@media (max-width: 991px) {
-	article#tour .odd .bottomphoto {
-		display: block;
-	}
-	article#tour .odd .topphoto {
-		display: none;
-	}
-}
 @media (max-width: 768px) {
 	article#tour .photo {
 		text-align: center;

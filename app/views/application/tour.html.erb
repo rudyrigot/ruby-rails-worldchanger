@@ -8,9 +8,9 @@
 		</div>
 
 		<% @arguments.each_with_index do |argument, index| %>
-			<div class="row argument<%= " odd" if index % 2 != 0 %>">
+			<div class="row argument">
 				<% if index % 2 != 0 %>
-					<div class="col-md-6 photo topphoto">
+					<div class="col-md-6 photo visible-lg visible-md hide-print">
 						<%= render partial: "argumentimage", locals: {image: argument.fragments["photo"] } %>
 					</div>
 				<% end %>
@@ -20,7 +20,7 @@
 					</h2>
 					<%= argument.fragments["description"].as_html(link_resolver(@ref)).html_safe %>
 				</div>
-				<div class="col-md-6 photo bottomphoto">
+				<div class="col-md-6 photo <%= " visible-sm visible-xs" if index % 2 != 0 %>">
 					<%= render partial: "argumentimage", locals: {image: argument.fragments["photo"] } %>
 				</div>
 			</div>
