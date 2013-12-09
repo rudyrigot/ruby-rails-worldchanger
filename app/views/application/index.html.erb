@@ -8,7 +8,7 @@
 
       <%= @document.fragments["description"].as_html(link_resolver(@ref)).html_safe %>
 
-      <p><%= link_to @document.fragments["cta_label"].value + " »", tour_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
+      <p><%= link_to "#{@document.fragments["cta_label"].value} »", tour_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
 
     </div>
   </div>
@@ -50,7 +50,7 @@
   <div class="container">
     <div class="well" id="pricewell">
       <p><%= @document.fragments['pricing_label'].value %> <strong>$<%= @minimum_price %>/mo</strong></p>
-      <p><%= link_to @document.fragments['pricing_button_label'].value+" »", pricing_path, :class => "btn btn-primary", :role => "button" %></p>
+      <p><%= link_to "#{@document.fragments['pricing_button_label'].value} »", pricing_path, :class => "btn btn-primary", :role => "button" %></p>
     </div>
   </div>
 
@@ -61,7 +61,7 @@
         <div class="col-md-3">
           <h4><%= question.fragments['question'].blocks[0].text %></h4>
           <%= question.fragments["short_answer"].as_html(link_resolver(@ref)).html_safe %>
-          <%= link_to question.fragments["link_label"].value+" »", link_resolver(@ref).link_to(Prismic::Fragments::DocumentLink.new(question.id, question.type, question.tags, question.slug, false)) %>
+          <%= link_to "#{question.fragments["link_label"].value} »", link_resolver(@ref).link_to(Prismic::Fragments::DocumentLink.new(question.id, question.type, question.tags, question.slug, false)) %>
         </div>
       <% end %>
     </div>

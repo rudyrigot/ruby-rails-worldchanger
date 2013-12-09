@@ -4,7 +4,7 @@
   <title>
     WorldChanger
     <% first_title = @document.first_title if @document %>
-    <%= first_title ? (" - " + first_title) : "" %>
+    <%= first_title ? " - #{first_title}" : "" %>
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>

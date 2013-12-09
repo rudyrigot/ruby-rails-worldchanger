@@ -94,7 +94,7 @@ class ApplicationController < ActionController::Base
       # Also, the overriding method nests them in a <p>, in order to be able to center them.
       @document.fragments['body'].blocks.each do |block|
         if block.is_a? Prismic::Fragments::StructuredText::Block::Image
-          def block.as_html(linkresolver = nil); %(<p class="image"><img src=") + self.url + %("></p>); end
+          def block.as_html(linkresolver = nil); %(<p class="image"><img src="#{self.url}"></p>); end
         end
       end
 
