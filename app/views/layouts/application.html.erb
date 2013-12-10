@@ -26,14 +26,14 @@
     </div>
     <div class="navbar-collapse collapse" id="top-navbar">
       <ul class="nav navbar-nav">
-        <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path %></li>
-        <li <% if @document.try(:id) == api.bookmark('tour') %>class="active"<% end %>><%= link_to "Product tour", tour_path %></li>
-        <li <% if @document.try(:id) == api.bookmark('pricing') %>class="active"<% end %>><%= link_to "Pricing", pricing_path %></li>
-        <li <% if @document.try(:id) == api.bookmark('faq') %>class="active"<% end %>><%= link_to "FAQ", faq_path %></li>
+        <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path + @maybe_ref_param %></li>
+        <li <% if @document.try(:id) == api.bookmark('tour') %>class="active"<% end %>><%= link_to "Product tour", tour_path + @maybe_ref_param %></li>
+        <li <% if @document.try(:id) == api.bookmark('pricing') %>class="active"<% end %>><%= link_to "Pricing", pricing_path + @maybe_ref_param %></li>
+        <li <% if @document.try(:id) == api.bookmark('faq') %>class="active"<% end %>><%= link_to "FAQ", faq_path + @maybe_ref_param %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li <% if ['blog', 'blogcategory', 'blogsearch', 'blogpost'].include?(params[:action]) %>class="active"<% end %>><%= link_to "Blog", blog_path %></li>
-        <li <% if @document.try(:id) == api.bookmark('about') %>class="active"<% end %>><%= link_to "About us", about_path %></li>
+        <li <% if ['blog', 'blogcategory', 'blogsearch', 'blogpost'].include?(params[:action]) %>class="active"<% end %>><%= link_to "Blog", blog_path + @maybe_ref_param %></li>
+        <li <% if @document.try(:id) == api.bookmark('about') %>class="active"<% end %>><%= link_to "About us", about_path + @maybe_ref_param %></li>
       </ul>
     </div><!--/.navbar-collapse -->
   </div>

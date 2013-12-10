@@ -18,7 +18,7 @@
 			<br>
 			by
 			<% if @author.tags.include?("staff") %>
-				<%= link_to @author.fragments['fullname'].blocks[0].text, about_path + "#" + @author.id %>,
+				<%= link_to @author.fragments['fullname'].blocks[0].text, about_path + "#" + @author.id + @maybe_ref_param %>,
 			<% else %>
 				<%= @author.fragments['fullname'].blocks[0].text %>,
 			<% end %>
@@ -32,7 +32,7 @@
 			<h4>Some related posts from our blog</h4>
 			<ul>
 				<% @relatedposts.each do |post| %>
-					<li><%= link_to post.first_title, link_resolver(@ref).link_to(Prismic::Fragments::DocumentLink.new(post.id, post.type, nil, post.slug, false)) %></li>
+					<li><%= link_to post.first_title, link_resolver(@maybe_ref).link_to(Prismic::Fragments::DocumentLink.new(post.id, post.type, nil, post.slug, false)) %></li>
 				<% end %>
 			</ul>
 		<% end %>

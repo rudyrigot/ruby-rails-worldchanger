@@ -3,8 +3,8 @@
 	<div class="container">
 
 		<div class="page-title">
-			<%= @document.fragments["title"].as_html(link_resolver(@ref)).html_safe %>
-			<%= @document.fragments["lede"].as_html(link_resolver(@ref)).html_safe %>
+			<%= @document.fragments["title"].as_html(link_resolver(@maybe_ref)).html_safe %>
+			<%= @document.fragments["lede"].as_html(link_resolver(@maybe_ref)).html_safe %>
 		</div>
 
 		<% @arguments.each_with_index do |argument, index| %>
@@ -18,7 +18,7 @@
 					<h2 id="<%= argument.id %>">
 						<%= argument.fragments["title"].blocks[0].text %>
 					</h2>
-					<%= argument.fragments["description"].as_html(link_resolver(@ref)).html_safe %>
+					<%= argument.fragments["description"].as_html(link_resolver(@maybe_ref)).html_safe %>
 				</div>
 				<div class="col-md-6 photo <%= " visible-sm visible-xs" if index % 2 != 0 %>">
 					<%= render partial: "argumentimage", locals: {image: argument.fragments["photo"] } %>

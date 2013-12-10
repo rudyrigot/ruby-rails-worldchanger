@@ -3,7 +3,7 @@
 		<label>Filter by category</label>
 		<div class="btn-group">
 			<% @blog_categories.each do |category| %>
-				<%= link_to category, blog_category_path(category), :class => 'categorylink btn btn-default'+(category == params[:slug] || (@document && category == @document.fragments['category'].value) ? ' active' : '') %>
+				<%= link_to category, blog_category_path(category) + @maybe_ref_param, :class => 'categorylink btn btn-default'+(category == params[:slug] || (@document && category == @document.fragments['category'].value) ? ' active' : '') %>
 			<% end %>
 		</div>
 	</div>
@@ -15,7 +15,7 @@
 		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 			<% @blog_categories.each do |category| %>
 				<li role="presentation">
-					<%= link_to category, blog_category_path(category), :role => "menuitem", :tabindex => "-1" %>
+					<%= link_to category, blog_category_path(category) + @maybe_ref_param, :role => "menuitem", :tabindex => "-1" %>
 				</li>
 			<% end %>
 		</ul>

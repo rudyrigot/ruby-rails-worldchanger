@@ -4,27 +4,27 @@
   <div class="jumbotron">
     <div class="container">
       
-      <%= @document.fragments["headline"].as_html(link_resolver(@ref)).html_safe %>
+      <%= @document.fragments["headline"].as_html(link_resolver(@maybe_ref)).html_safe %>
 
-      <%= @document.fragments["description"].as_html(link_resolver(@ref)).html_safe %>
+      <%= @document.fragments["description"].as_html(link_resolver(@maybe_ref)).html_safe %>
 
-      <p><%= link_to "#{@document.fragments["cta_label"].value} »", tour_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
+      <p><%= link_to "#{@document.fragments["cta_label"].value} »", tour_path + @maybe_ref_param, :class => "btn btn-primary btn-lg", :role => "button" %></p>
 
     </div>
   </div>
 
 
   <div class="container section-title">
-    <%= @document.fragments["title_user_friendly"].as_html(link_resolver(@ref)).html_safe %>
+    <%= @document.fragments["title_user_friendly"].as_html(link_resolver(@maybe_ref)).html_safe %>
   </div>
 
   <div class="container">
     <div class="row">
       <% @user_friendly_arguments.each do |argument| %>
         <div class="col-md-4">
-          <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@ref)).html_safe %></p>
+          <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@maybe_ref)).html_safe %></p>
           <h3><%= argument.fragments["catcher_title"].blocks[0].text %></h3>
-          <%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>
+          <%= argument.fragments["catcher_description"].as_html(link_resolver(@maybe_ref)).html_safe %>
         </div>
       <% end %>
     </div>
@@ -32,16 +32,16 @@
 
 
   <div class="container section-title">
-    <%= @document.fragments["title_design"].as_html(link_resolver(@ref)).html_safe %>
+    <%= @document.fragments["title_design"].as_html(link_resolver(@maybe_ref)).html_safe %>
   </div>
 
   <div class="container">
     <div class="row">
       <% @design_arguments.each do |argument| %>
         <div class="col-md-4">
-          <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@ref)).html_safe %></p>
+          <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@maybe_ref)).html_safe %></p>
           <h3><%= argument.fragments["catcher_title"].blocks[0].text %></h3>
-          <%= argument.fragments["catcher_description"].as_html(link_resolver(@ref)).html_safe %>
+          <%= argument.fragments["catcher_description"].as_html(link_resolver(@maybe_ref)).html_safe %>
         </div>
       <% end %>
     </div>
@@ -50,7 +50,7 @@
   <div class="container">
     <div class="well" id="pricewell">
       <p><%= @document.fragments['pricing_label'].value %> <strong>$<%= @minimum_price %>/mo</strong></p>
-      <p><%= link_to "#{@document.fragments['pricing_button_label'].value} »", pricing_path, :class => "btn btn-primary", :role => "button" %></p>
+      <p><%= link_to "#{@document.fragments['pricing_button_label'].value} »", pricing_path + @maybe_ref_param, :class => "btn btn-primary", :role => "button" %></p>
     </div>
   </div>
 
@@ -60,8 +60,8 @@
       <% @questions.each do |question| %>
         <div class="col-md-3">
           <h4><%= question.fragments['question'].blocks[0].text %></h4>
-          <%= question.fragments["short_answer"].as_html(link_resolver(@ref)).html_safe %>
-          <%= link_to "#{question.fragments["link_label"].value} »", link_resolver(@ref).link_to(Prismic::Fragments::DocumentLink.new(question.id, question.type, question.tags, question.slug, false)) %>
+          <%= question.fragments["short_answer"].as_html(link_resolver(@maybe_ref)).html_safe %>
+          <%= link_to "#{question.fragments["link_label"].value} »", link_resolver(@maybe_ref).link_to(Prismic::Fragments::DocumentLink.new(question.id, question.type, question.tags, question.slug, false)) %>
         </div>
       <% end %>
     </div>

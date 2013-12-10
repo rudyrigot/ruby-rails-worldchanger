@@ -11,29 +11,29 @@ module PrismicHelper
     doc.as_html(link_resolver(ref)).html_safe
   end
 
-  def link_resolver(ref)
-    Prismic::LinkResolver.new(ref) do |doc|
+  def link_resolver(maybe_ref)
+    Prismic::LinkResolver.new(maybe_ref) do |doc|
+      maybe_ref_param = maybe_ref ? "?ref=#{maybe_ref}" : '' ;
       case doc.link_type
       when "homepage"
-        root_path
+        root_path + maybe_ref_param
       when "article"
-        tour_path if doc.id == api.bookmark("tour")
-        pricing_path if doc.id == api.bookmark("pricing")
-        about_path if doc.id == api.bookmark("about")
-        faq_path if doc.id == api.bookmark("faq")
+        tour_path + maybe_ref_param if doc.id == api.bookmark("tour")
+        pricing_path + maybe_ref_param if doc.id == api.bookmark("pricing")
+        about_path + maybe_ref_param if doc.id == api.bookmark("about")
+        faq_path + maybe_ref_param if doc.id == api.bookmark("faq")
       when "argument"
-        tour_path + "#" + doc.id
+        tour_path + maybe_ref_param + "#" + doc.id
       when "pricing"
-        pricing_path + "#" + doc.id
+        pricing_path + maybe_ref_param + "#" + doc.id
       when "author"
-        about_path + "#" + doc.id
+        about_path + maybe_ref_param + "#" + doc.id
       when "faq"
-        faq_path + "#" + doc.id
+        faq_path + maybe_ref_param + "#" + doc.id
       when "blog"
-        blogpost_path(doc.id, doc.slug)
+        blogpost_path(doc.id, doc.slug) + maybe_ref_param
       else
-        # I'm leaving this here as long as I'm not done developing all the templates, it gives me a default one
-        document_path(id: doc.id, slug: doc.slug)
+        "#unsupportedtype/"+doc.link_type
       end
     end
   end
