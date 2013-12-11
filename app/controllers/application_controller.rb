@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :set_ref, :set_maybe_ref, :set_maybe_ref_param
+  before_action :set_ref, :set_maybe_ref
   before_action :set_blog_categories, only: [:blog, :blogcategory, :blogpost, :blogsearch]
 
   def index
@@ -161,10 +161,6 @@ class ApplicationController < ActionController::Base
 
   def set_maybe_ref
     @maybe_ref = (params[:ref] != '' ? params[:ref] : nil)
-  end
-
-  def set_maybe_ref_param
-    @maybe_ref_param = @maybe_ref ? '?ref='+@maybe_ref : ''
   end
 
   def set_blog_categories

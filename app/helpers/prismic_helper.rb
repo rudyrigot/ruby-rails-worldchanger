@@ -13,25 +13,24 @@ module PrismicHelper
 
   def link_resolver(maybe_ref)
     Prismic::LinkResolver.new(maybe_ref) do |doc|
-      maybe_ref_param = maybe_ref ? "?ref=#{maybe_ref}" : '' ;
       case doc.link_type
       when "homepage"
-        root_path + maybe_ref_param
+        root_path(ref: maybe_ref)
       when "article"
-        tour_path + maybe_ref_param if doc.id == api.bookmark("tour")
-        pricing_path + maybe_ref_param if doc.id == api.bookmark("pricing")
-        about_path + maybe_ref_param if doc.id == api.bookmark("about")
-        faq_path + maybe_ref_param if doc.id == api.bookmark("faq")
+        tour_path(ref: maybe_ref) if doc.id == api.bookmark("tour")
+        pricing_path(ref: maybe_ref) if doc.id == api.bookmark("pricing")
+        about_path(ref: maybe_ref) if doc.id == api.bookmark("about")
+        faq_path(ref: maybe_ref) if doc.id == api.bookmark("faq")
       when "argument"
-        tour_path + maybe_ref_param + "#" + doc.id
+        tour_path(ref: maybe_ref) + "#" + doc.id
       when "pricing"
-        pricing_path + maybe_ref_param + "#" + doc.id
+        pricing_path(ref: maybe_ref) + "#" + doc.id
       when "author"
-        about_path + maybe_ref_param + "#" + doc.id
+        about_path(ref: maybe_ref) + "#" + doc.id
       when "faq"
-        faq_path + maybe_ref_param + "#" + doc.id
+        faq_path(ref: maybe_ref) + "#" + doc.id
       when "blog"
-        blogpost_path(doc.id, doc.slug) + maybe_ref_param
+        blogpost_path(doc.id, doc.slug, ref: maybe_ref)
       else
         "#unsupportedtype/"+doc.link_type
       end

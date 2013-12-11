@@ -18,7 +18,7 @@
 						<%= plan.fragments["bestfor"].as_html(link_resolver(@maybe_ref)).html_safe %>
 						<h2>$<%= plan.fragments["price"].value.to_i %> /mo</h2>
 						<p>Get <%= plan.fragments["magnitude"].value.to_i %>% of your world changed.</p>
-						<p><%= link_to "Learn more", tour_path + @maybe_ref_param, :class => "btn btn-primary" %></p>
+						<p><%= link_to "Learn more", tour_path(ref: @maybe_ref), :class => "btn btn-primary" %></p>
 					</div>
 				</div>
 

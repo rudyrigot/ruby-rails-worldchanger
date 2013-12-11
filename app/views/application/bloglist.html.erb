@@ -14,7 +14,7 @@
 		<% end %>
 
 		<% @documents.each do |document| %>
-			<a href="<%= blogpost_path(document.id, document.slug) + @maybe_ref_param %>" class="row blog-post">
+			<a href="<%= blogpost_path(document.id, document.slug, ref: @maybe_ref) %>" class="row blog-post">
 				<div class="col-md-3 col-md-offset-2 image">
 					<p>
 						<%= document.fragments['image'].get_view('medium').as_html(link_resolver(@maybe_ref)).html_safe %>
