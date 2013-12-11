@@ -16,11 +16,19 @@ module PrismicHelper
       case doc.link_type
       when "homepage"
         root_path(ref: maybe_ref)
-      when "article"
-        tour_path(ref: maybe_ref) if doc.id == api.bookmark("tour")
-        pricing_path(ref: maybe_ref) if doc.id == api.bookmark("pricing")
-        about_path(ref: maybe_ref) if doc.id == api.bookmark("about")
-        faq_path(ref: maybe_ref) if doc.id == api.bookmark("faq")
+      when "article" # This type is special: the URL is built depending on the document's prismic.io bookmark
+        case doc.id
+        when api.bookmark("tour")
+          tour_path(ref: maybe_ref)
+        when api.bookmark("pricing")
+          pricing_path(ref: maybe_ref)
+        when api.bookmark("about")
+          about_path(ref: maybe_ref)
+        when api.bookmark("faq")
+          faq_path(ref: maybe_ref)
+        else
+          raise "Article of id #{doc.id} doesn't have a known bookmark"
+        end
       when "argument"
         tour_path(ref: maybe_ref) + "#" + doc.id
       when "pricing"
@@ -32,7 +40,7 @@ module PrismicHelper
       when "blog"
         blogpost_path(doc.id, doc.slug, ref: maybe_ref)
       else
-        "#unsupportedtype/"+doc.link_type
+        raise "link_resolver doesn't know how to write URLs for #{doc.link_type} type."
       end
     end
   end
