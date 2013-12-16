@@ -7,56 +7,62 @@ class ApplicationController < ActionController::Base
   	@document = PrismicService.get_document(api.bookmark("homepage"), api, @ref)
     @user_friendly_arguments = api.create_search_form("arguments")
                     .query(%([[:d = at(document.tags, ["userfriendly"])][:d = at(document.tags, ["featured"])]]))
-                    .set("orderings", "[my.argument.priority desc]")
+                    .orderings("[my.argument.priority desc]")
                     .submit(@ref)
     @design_arguments = api.create_search_form("arguments")
                     .query(%([[:d = at(document.tags, ["design"])][:d = at(document.tags, ["featured"])]]))
-                    .set("orderings", "[my.argument.priority desc]")
+                    .orderings("[my.argument.priority desc]")
                     .submit(@ref)
-    @minimum_price = api.create_search_form("plans")
-                    .set("orderings", "[my.pricing.price]").submit(@ref)[0]
-                    .fragments['price'].value.to_i
+    @plans_by_price = api.create_search_form("plans")
+                    .orderings("[my.pricing.price]")
+                    .submit(@ref)
+    begin
+        @minimum_price = @plans_by_price[0]['price'].value.to_i
+    rescue
+    	logger.info("Minimum requirements to display the minimum price are not met (is there any plan published right now?)")
+    	@minimum_price = 0
+    end
     @questions = api.create_search_form("questions")
                     .query(%([[:d = at(document.tags, ["featured"])]]))
-                    .set("orderings", "[my.faq.priority desc]")
+                    .orderings("[my.faq.priority desc]")
                     .submit(@ref)
   end
 
   def tour
     @document = PrismicService.get_document(api.bookmark("tour"), api, @ref)
     @arguments = api.create_search_form("arguments")
-                    .set("orderings", "[my.argument.priority desc]")
+                    .orderings("[my.argument.priority desc]")
                     .submit(@ref)
   end
 
   def pricing
     @document = PrismicService.get_document(api.bookmark("pricing"), api, @ref)
     @plans = api.create_search_form("plans")
-                    .set("orderings", "[my.pricing.price]")
+                    .orderings("[my.pricing.price]")
                     .submit(@ref)
     @questions = api.create_search_form("questions")
                     .query(%([[:d = any(document.tags, ["pricing"])]]))
-                    .set("orderings", "[my.faq.priority desc]")
+                    .orderings("[my.faq.priority desc]")
                     .submit(@ref)
   end
 
   def about
   	@document = PrismicService.get_document(api.bookmark("about"), api, @ref)
   	@staff = api.create_search_form("staff")
-                    .set("orderings", "[my.author.level]")
+                    .orderings("[my.author.level]")
                     .submit(@ref)
   end
 
   def faq
     @document = PrismicService.get_document(api.bookmark("faq"), api, @ref)
     @questions = api.create_search_form("questions")
-                    .set("orderings", "[my.faq.priority desc]")
+                    .orderings("[my.faq.priority desc]")
                     .submit(@ref)
   end
 
   def blog
     @documents = api.create_search_form("blog")
-                    .set("orderings", "[my.blog.date desc]")
+                    .orderings("[my.blog.date desc]")
                     .submit(@ref)
     render :bloglist
   end
@@ -64,7 +70,7 @@ class ApplicationController < ActionController::Base
   def blogcategory
     @documents = api.create_search_form("blog")
                     .query(%([[:d = at(my.blog.category, "#{params[:slug]}")]]))
-                    .set("orderings", "[my.blog.date desc]")
+                    .orderings("[my.blog.date desc]")
                     .submit(@ref)
     render :bloglist
   end
@@ -72,7 +78,7 @@ class ApplicationController < ActionController::Base
   def blogsearch
     @documents = api.create_search_form("blog")
                     .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
-                    .set("orderings", "[my.blog.date desc]")
+                    .orderings("[my.blog.date desc]")
                     .submit(@ref)
     render :bloglist
   end
@@ -82,21 +88,16 @@ class ApplicationController < ActionController::Base
     slug = params[:slug]
 
     @document = PrismicService.get_document(id, api, @ref)
-    if @document.nil?
-      render inline: "Document not found", status: :not_found, file: "#{Rails.root}/public/404", layout: false
-    elsif slug == @document.slug
+
+    # Checking if the doc / slug combination is right, and doing what needs to be done
+	@slug_checker = PrismicService.slug_checker(@document, slug)
+	if !@slug_checker[:correct]
+		render inline: "Document not found", status: :not_found, file: "#{Rails.root}/public/404", layout: false if !@slug_checker[:redirect]
+		redirect_to blogpost_path(id, @document.slug), status: :moved_permanently if @slug_checker[:redirect]
+	else # slug is right
 
       # Retrieving the author in order to display their full name and title
       @author = PrismicService.get_document(@document.fragments['author'].id, api, @ref)
-
-      # Overriding the way images in structured text are rendered into HTML.
-      # The problem was that they are rendered with "width" and "height", making them non-flexible.
-      # Also, the overriding method nests them in a <p>, in order to be able to center them.
-      @document.fragments['body'].blocks.each do |block|
-        if block.is_a? Prismic::Fragments::StructuredText::Block::Image
-          def block.as_html(linkresolver = nil); %(<p class="image"><img src="#{self.url}"></p>); end
-        end
-      end
 
       # Retieving the potential related posts
       if @document.fragments['relatedpost']
@@ -108,11 +109,7 @@ class ApplicationController < ActionController::Base
         end
       end
 
-    elsif @document.slugs.include?(slug)
-      redirect_to blogpost_path(id, @document.slug), status: :moved_permanently
-    else
-      render inline: "Document not found", status: :not_found, file: "#{Rails.root}/public/404", layout: false
-    end
+	end
   end
 
   # OAuth pages controllers

@@ -7,37 +7,37 @@
 	<div class="container">
 
 		<p class="image">
-			<%= image_tag @document.fragments['image'].get_view('large').url %>
+			<%= image_tag @document['blog.image'] && @document['blog.image'].get_view('large') ? @document['blog.image'].get_view('large').url : '' %>
 		</p>
 
 		<div class="metainformation well">
 			<p class="authorimage">
-				<img src="<%= @author.fragments['photo'].get_view('icon').url %>">
+				<%= image_tag @author['author.photo'] && @author['author.photo'].get_view('icon') ? @author['author.photo'].get_view('icon').url : '' %>
 			</p>
-			Published on <%= @document.fragments['date'].value.strftime("%b %-d %Y") %>
+			Published on <%= @document['blog.date'] ? @document['blog.date'].value.strftime("%b %-d %Y") : '' %>
 			<br>
 			by
 			<% if @author.tags.include?("staff") %>
-				<%= link_to @author.fragments['fullname'].blocks[0].text, about_path + "#" + @author.id + @maybe_ref_param %>,
+				<%= link_to @author['author.fullname'] ? @author['author.fullname'].as_text : '', about_path(ref: @maybe_ref) + "#" + @author.id %>,
 			<% else %>
-				<%= @author.fragments['fullname'].blocks[0].text %>,
+				<%= @author['author.fullname'] ? @author['author.fullname'].as_text : '' %>,
 			<% end %>
 			<br>
-			<%= @author.fragments['title'].value if @author.fragments['title'] %><%= ", " + @author.fragments['company'].value if @author.fragments['company'] %>
+			<%= @author['author.title'] ? @author['author.title'].as_text : '' %><%= @author['author.company'] ? ", " + @author['author.company'].as_text : '' %>
 		</div>
 
-		<%= @document.fragments['body'].as_html(link_resolver(@ref)).html_safe %>
+		<%= @document['blog.body'].as_html_safe(link_resolver(@ref)) %>
 
 		<% if @relatedposts && !@relatedposts.empty? %>
 			<h4>Some related posts from our blog</h4>
 			<ul>
 				<% @relatedposts.each do |post| %>
-					<li><%= link_to post.first_title, link_resolver(@maybe_ref).link_to(Prismic::Fragments::DocumentLink.new(post.id, post.type, nil, post.slug, false)) %></li>
+					<li><%= link_to post.first_title, link_resolver(@maybe_ref).link_to(post) %></li>
 				<% end %>
 			</ul>
 		<% end %>
 
-		<% if @document.fragments['allow_comments'].value.downcase == "yes" %>
+		<% if @document['blog.allow_comments'] && @document['blog.allow_comments'].value.downcase == "yes" %>
 			<div id="disqus_thread"></div>
 		    <script type="text/javascript">
 		        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */

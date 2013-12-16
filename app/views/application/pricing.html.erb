@@ -3,8 +3,8 @@
 	<div class="container">
 
 		<div class="page-title">
-			<%= @document.fragments["title"].as_html(link_resolver(@maybe_ref)).html_safe %>
-			<%= @document.fragments["lede"].as_html(link_resolver(@maybe_ref)).html_safe %>
+			<%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+			<%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 		</div>
 
 
@@ -12,12 +12,12 @@
 			<% @plans.each do |plan| %>
 
 				<div class="col-md-4 plan">
-					<div class="planframe" style="background-color: #<%= plan.fragments["color"].value %>">
-						<h2><%= plan.fragments["name"].blocks[0].text %></h2>
+					<div class="planframe" style="background-color: #<%= plan['pricing.color'] ? plan['pricing.color'].value : 'ffffff' %>">
+						<h2><%= plan['pricing.name'] ? plan['pricing.name'].as_text : '' %></h2>
 						<h4>Best for:</h4>
-						<%= plan.fragments["bestfor"].as_html(link_resolver(@maybe_ref)).html_safe %>
-						<h2>$<%= plan.fragments["price"].value.to_i %> /mo</h2>
-						<p>Get <%= plan.fragments["magnitude"].value.to_i %>% of your world changed.</p>
+						<%= plan['pricing.bestfor'] ? plan['pricing.bestfor'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+						<h2>$<%= plan['pricing.price'] ? plan['pricing.price'].value.to_i : '' %> /mo</h2>
+						<p>Get <%= plan['pricing.magnitude'] ? plan['pricing.magnitude'].value.to_i : '' %>% of your world changed.</p>
 						<p><%= link_to "Learn more", tour_path(ref: @maybe_ref), :class => "btn btn-primary" %></p>
 					</div>
 				</div>
@@ -25,7 +25,7 @@
 			<% end %>
 		</div>
 
-		<%= render partial: "faqcarrousel", locals: { questions: @questions } %>
+		<%= render partial: "faqaccordion", locals: { questions: @questions } %>
 		
 	</div>
 

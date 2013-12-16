@@ -3,7 +3,7 @@
 		<label>Filter by category</label>
 		<div class="btn-group">
 			<% @blog_categories.each do |category| %>
-				<%= link_to category, blog_category_path(category, ref: @maybe_ref), :class => 'categorylink btn btn-default'+(category == params[:slug] || (@document && category == @document.fragments['category'].value) ? ' active' : '') %>
+				<%= link_to category, blog_category_path(category, ref: @maybe_ref), :class => 'categorylink btn btn-default'+(category == params[:slug] || (@document && @document['blog.category'] && category == @document['blog.category'].value) ? ' active' : '') %>
 			<% end %>
 		</div>
 	</div>

@@ -23,5 +23,17 @@ module PrismicService
       Prismic.api(config('url'), access_token)
     end
 
+    def slug_checker(document, slug)
+      if document.nil?
+        return { correct: false, redirect: false }
+      elsif slug == document.slug
+        return { correct: true }
+      elsif document.slugs.include?(slug)
+        return { correct: false, redirect: true }
+      else
+        return { correct: false, redirect: false }
+      end
+    end
+
   end
 end

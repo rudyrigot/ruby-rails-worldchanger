@@ -3,12 +3,12 @@
 	<div class="container">
 
 		<div class="page-title">
-			<%= @document.fragments["title"].as_html(link_resolver(@maybe_ref)).html_safe %>
-			<%= @document.fragments["lede"].as_html(link_resolver(@maybe_ref)).html_safe %>
+			<%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+			<%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 		</div>
 
 
-		<%= render partial: "faqcarrousel", locals: { questions: @questions } %>
+		<%= render partial: "faqaccordion", locals: { questions: @questions } %>
 		
 	</div>
 
