@@ -5,7 +5,7 @@ module PrismicHelper
   end
 
   def link_resolver(maybe_ref)
-    Prismic::LinkResolver.new(maybe_ref) do |doc|
+    @link_resolver ||= Prismic::LinkResolver.new(maybe_ref) do |doc|
       case doc.link_type
       when "homepage"
         root_path(ref: maybe_ref)
