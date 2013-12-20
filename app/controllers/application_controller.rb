@@ -5,15 +5,15 @@ class ApplicationController < ActionController::Base
 
   def index
   	@document = PrismicService.get_document(api.bookmark("homepage"), api, @ref)
-    @user_friendly_arguments = api.create_search_form("arguments")
+    @user_friendly_arguments = api.form("arguments")
                     .query(%([[:d = at(document.tags, ["userfriendly"])][:d = at(document.tags, ["featured"])]]))
                     .orderings("[my.argument.priority desc]")
                     .submit(@ref)
-    @design_arguments = api.create_search_form("arguments")
+    @design_arguments = api.form("arguments")
                     .query(%([[:d = at(document.tags, ["design"])][:d = at(document.tags, ["featured"])]]))
                     .orderings("[my.argument.priority desc]")
                     .submit(@ref)
-    @plans_by_price = api.create_search_form("plans")
+    @plans_by_price = api.form("plans")
                     .orderings("[my.pricing.price]")
                     .submit(@ref)
     begin
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     	logger.info("Minimum requirements to display the minimum price are not met (is there any plan published right now?)")
     	@minimum_price = 0
     end
-    @questions = api.create_search_form("questions")
+    @questions = api.form("questions")
                     .query(%([[:d = at(document.tags, ["featured"])]]))
                     .orderings("[my.faq.priority desc]")
                     .submit(@ref)
@@ -30,17 +30,17 @@ class ApplicationController < ActionController::Base
 
   def tour
     @document = PrismicService.get_document(api.bookmark("tour"), api, @ref)
-    @arguments = api.create_search_form("arguments")
+    @arguments = api.form("arguments")
                     .orderings("[my.argument.priority desc]")
                     .submit(@ref)
   end
 
   def pricing
     @document = PrismicService.get_document(api.bookmark("pricing"), api, @ref)
-    @plans = api.create_search_form("plans")
+    @plans = api.form("plans")
                     .orderings("[my.pricing.price]")
                     .submit(@ref)
-    @questions = api.create_search_form("questions")
+    @questions = api.form("questions")
                     .query(%([[:d = any(document.tags, ["pricing"])]]))
                     .orderings("[my.faq.priority desc]")
                     .submit(@ref)
@@ -48,27 +48,27 @@ class ApplicationController < ActionController::Base
 
   def about
   	@document = PrismicService.get_document(api.bookmark("about"), api, @ref)
-  	@staff = api.create_search_form("staff")
+  	@staff = api.form("staff")
                     .orderings("[my.author.level]")
                     .submit(@ref)
   end
 
   def faq
     @document = PrismicService.get_document(api.bookmark("faq"), api, @ref)
-    @questions = api.create_search_form("questions")
+    @questions = api.form("questions")
                     .orderings("[my.faq.priority desc]")
                     .submit(@ref)
   end
 
   def blog
-    @documents = api.create_search_form("blog")
+    @documents = api.form("blog")
                     .orderings("[my.blog.date desc]")
                     .submit(@ref)
     render :bloglist
   end
 
   def blogcategory
-    @documents = api.create_search_form("blog")
+    @documents = api.form("blog")
                     .query(%([[:d = at(my.blog.category, "#{params[:slug]}")]]))
                     .orderings("[my.blog.date desc]")
                     .submit(@ref)
@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
   end
 
   def blogsearch
-    @documents = api.create_search_form("blog")
+    @documents = api.form("blog")
                     .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
                     .orderings("[my.blog.date desc]")
                     .submit(@ref)
