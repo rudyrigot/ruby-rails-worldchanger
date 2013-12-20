@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
     # Checking if the doc / slug combination is right, and doing what needs to be done
 	@slug_checker = PrismicService.slug_checker(@document, slug)
 	if !@slug_checker[:correct]
-		render inline: "Document not found", status: :not_found, file: "#{Rails.root}/public/404", layout: false if !@slug_checker[:redirect]
+		render status: :not_found, file: "#{Rails.root}/public/404", layout: false if !@slug_checker[:redirect]
 		redirect_to blogpost_path(id, @document.slug), status: :moved_permanently if @slug_checker[:redirect]
 	else # slug is right
 
