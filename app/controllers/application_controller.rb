@@ -90,11 +90,11 @@ class ApplicationController < ActionController::Base
     @document = PrismicService.get_document(id, api, @ref)
 
     # Checking if the doc / slug combination is right, and doing what needs to be done
-	@slug_checker = PrismicService.slug_checker(@document, slug)
-	if !@slug_checker[:correct]
-		render status: :not_found, file: "#{Rails.root}/public/404", layout: false if !@slug_checker[:redirect]
-		redirect_to blogpost_path(id, @document.slug), status: :moved_permanently if @slug_checker[:redirect]
-	else # slug is right
+    @slug_checker = PrismicService.slug_checker(@document, slug)
+    if !@slug_checker[:correct]
+      render status: :not_found, file: "#{Rails.root}/public/404", layout: false if !@slug_checker[:redirect]
+      redirect_to blogpost_path(id, @document.slug), status: :moved_permanently if @slug_checker[:redirect]
+    else # slug is right
 
       # Retrieving the author in order to display their full name and title
       @author = PrismicService.get_document(@document.fragments['author'].id, api, @ref)
@@ -109,7 +109,7 @@ class ApplicationController < ActionController::Base
         end
       end
 
-	end
+    end
   end
 
   private
