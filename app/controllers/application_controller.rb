@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
                     .orderings("[my.pricing.price]")
                     .submit(@ref)
     begin
-        @minimum_price = @plans_by_price[0]['price'].value.to_i
+        @minimum_price = @plans_by_price[0]['pricing.price'].value.to_i
     rescue
     	logger.info("Minimum requirements to display the minimum price are not met (is there any plan published right now?)")
     	@minimum_price = 0

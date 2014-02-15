@@ -1,30 +1,48 @@
 <article id="homepage">
 
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container">
+  <div class="container">
+
+    <div class="page-title">
       
       <%= @document['homepage.headline'] ? @document['homepage.headline'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 
       <%= @document['homepage.description'] ? @document['homepage.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 
-      <p><%= link_to "#{@document['homepage.cta_label'] ? @document['homepage.cta_label'].as_text : ''} »", tour_path(ref: @maybe_ref), :class => "btn btn-primary btn-lg", :role => "button" %></p>
+      <p class="cta_homelink"><%= link_to "#{@document['homepage.cta_label'] ? @document['homepage.cta_label'].as_text : ''}", tour_path(ref: @maybe_ref), :role => "button" %></p>
 
     </div>
+
   </div>
 
+  <% if @document['homepage.main_image'] %>
+    <div id="main-image">
+      <style type="text/css">
+        @media (min-width: 993px) {
+          #main-image { background-image: url('<%= @document['homepage.main_image'].get_view('large').url %>') }
+        }
+        @media (max-width: 992px) and (min-width: 768px) {
+          #main-image { background-image: url('<%= @document['homepage.main_image'].get_view('medium').url %>') }
+        }
+        @media (max-width: 767px) {
+          #main-image { background-image: url('<%= @document['homepage.main_image'].get_view('small').url %>') }
+        }
+      </style>
+    </div>
+  <% end %>
 
   <div class="container section-title">
     <%= @document['homepage.title_user_friendly'].as_html_safe(link_resolver(@maybe_ref)) %>
   </div>
+  <div class="container redline"><span></span></div>
 
   <div class="container">
-    <div class="row">
+    <div class="row arguments-row">
       <% @user_friendly_arguments.each do |argument| %>
-        <div class="col-md-4">
-          <p class="argument-image"><%= argument['argument.icon'] && argument['argument.icon'].get_view('medium') ? argument['argument.icon'].get_view('medium').as_html_safe(link_resolver(@maybe_ref)) : '' %></p>
-          <h3><%= argument['argument.catcher_title'] ? argument['argument.catcher_title'].as_text : '' %></h3>
-          <%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+        <div class="col-md-4 arguments-col">
+          <div class="argument" style="background: url('<%= argument['argument.icon'] && argument['argument.icon'].get_view('small') ? argument['argument.icon'].get_view('small').url : '' %>') no-repeat">
+            <h3><%= argument['argument.catcher_title'] ? argument['argument.catcher_title'].as_text : '' %></h3>
+            <%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+          </div>
         </div>
       <% end %>
     </div>
@@ -32,27 +50,37 @@
 
 
   <div class="container section-title">
-    <%= @document['document.title_design'] ? @document['document.title_design'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+    <%= @document['homepage.title_design'] ? @document['homepage.title_design'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
   </div>
+  <div class="container redline"><span></span></div>
 
   <div class="container">
-    <div class="row">
+    <div class="row arguments-row">
       <% @design_arguments.each do |argument| %>
-        <div class="col-md-4">
-          <p class="argument-image"><%= argument['argument.icon'] && argument['argument.icon'].get_view('medium') ? argument['argument.icon'].get_view('medium').as_html_safe(link_resolver(@maybe_ref)) : '' %></p>
-          <h3><%= argument['argument.catcher_title'] ? argument['argument.catcher_title'].as_text : '' %></h3>
-          <%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+        <div class="col-md-4 arguments-col">
+          <div class="argument" style="background: url('<%= argument['argument.icon'] && argument['argument.icon'].get_view('small') ? argument['argument.icon'].get_view('small').url : '' %>') no-repeat">
+            <h3><%= argument['argument.catcher_title'] ? argument['argument.catcher_title'].as_text : '' %></h3>
+            <%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="container">
-    <div class="well" id="pricewell">
-      <p><%= @document['homepage.pricing_label'] ? @document['homepage.pricing_label'].as_text : '' %> <strong>$<%= @minimum_price %>/mo</strong></p>
-      <p><%= link_to "#{@document['homepage.pricing_button_label'] ? @document['homepage.pricing_button_label'].as_text : ''} »", pricing_path(ref: @maybe_ref), :class => "btn btn-primary", :role => "button" %></p>
-    </div>
+  <div class="container" id="pricewell">
+    <p><%= @document['homepage.pricing_label'] ? @document['homepage.pricing_label'].as_text : '' %> <strong>$<%= @minimum_price %>/mo</strong></p>
+    <p><%= link_to (@document['homepage.pricing_button_label'] ? @document['homepage.pricing_button_label'].as_text : ''), pricing_path(ref: @maybe_ref), :class => "btn btn-pricing", :role => "button" %></p>
   </div>
+  <style type="text/css">
+    #pricewell {
+      background-image: url('<%= @document['homepage.pricing_image'] && @document['homepage.pricing_image'].get_view('small') ? @document['homepage.pricing_image'].get_view('small').url : '' %>')
+    }
+    @media (max-width: 767px) {
+      #pricewell {
+        background-image: url('<%= @document['homepage.pricing_image'] && @document['homepage.pricing_image'].get_view('icon') ? @document['homepage.pricing_image'].get_view('icon').url : '' %>')
+      }
+    }
+  </style>
 
   <div class="container">
     <%= @document['homepage.title_faq'] ? @document['homepage.title_faq'].as_html_safe(link_resolver(@ref)) : '' %>

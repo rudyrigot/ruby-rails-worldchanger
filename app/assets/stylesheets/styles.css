@@ -1,44 +1,245 @@
-/* Move down content because we have a fixed navbar that is 50px tall */
-body {
-  padding-top: 50px;
-  padding-bottom: 20px;
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+}
+h2 {
+	margin: 0;
+	text-transform: uppercase;
+	color: #262626;
+	font-size: 26px;
+}
+.footer-container {
+	padding: 55px 0 45px;
+	background-color: #FBFBFB;
+	color: #596272;
+}
+footer a {
+	color: #F51200;
+}
+@media (max-width: 767px) {
+	h2 {
+		font-size: 16px;
+	}
+	.footer-container {
+		font-size: 12px;
+		line-height: 2em;
+		padding: 50px 0 20px;
+	}
+}
+
+/* Navigation bar */
+.navbar-worldchanger {
+	margin-bottom: 0;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 12px;
+	border: 1px solid #DDDFE3;
+}
+.navbar-brand, .navbar-nav>li>a {
+	padding-top: 42px;
+	padding-bottom: 42px;
+}
+.navbar-nav>li>a {
+	padding-left: 25px;
+	padding-right: 25px;
+}
+.navbar-nav a {
+	color: #596271;
+}
+.nav>li>a:hover, .nav>li>a:focus, .nav>li.active>a {
+	background-color: inherit;
+	color: #F4351C;
+}
+a.navbar-brand {
+	color: #262626;
+	font-size: 1em;
+}
+.navbar-header .icon-bar {
+	background-color: #D8D8D8;
+	height: 3px;
+	border-radius: 3px;
+}
+.navbar-toggle {
+	margin-top: 11px;
+}
+@media (max-width: 992px) {
+	.navbar-nav>li>a {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}
+@media (max-width: 767px) {
+	.navbar-brand {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.navbar-nav>li>a {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
 }
 
 /* General CSS */
 .page-title {
-	margin-top: 50px;
-	margin-bottom: 80px;
+	margin: 75px 0;
+	text-align: center;
+	font-weight: 300;
+	font-size: 24px;
+}
+.page-title h1 {
+	margin: 0;
+	text-transform: uppercase;
+	font-weight: 300;
+	color: #262626;
+}
+.page-title p {
+	margin: 25px 0 0;
+	line-height: 1.8em;
+	color: #586272;
+}
+.page-title .cta_homelink {
+	font-weight: 900;
+	font-size: 12px;
+	margin: 25px 0 0;
+	text-transform: uppercase;
+}
+.page-title .cta_homelink a {
+	color: #F51200;
+	letter-spacing: 2px;
+}
+@media (max-width: 767px) {
+	.page-title {
+		margin: 40px 0 56px;
+	}
+	.page-title h1 {
+		font-size: 29px;
+		line-height: 1.3em;
+	}
+	.page-title p {
+		font-size: 17px;
+		padding: 0 15px;
+	}
+	.page-title .cta_homelink {
+		font-size: 8px;
+		margin-top: 40px;
+	}
 }
 
 /* Homepage */
+article#homepage #main-image {
+	height: 500px;
+
+}
 article#homepage .section-title {
-	margin-top: 60px;
-	margin-bottom: 10px;
+	margin-top: 70px;
+	padding-bottom: 50px;
+	border-bottom: 1px solid #DDDFE3;
 }
-article#homepage .argument-image {
-	text-align: center;
+article#homepage .section-title p {
+	margin: 5px 0 0;
+	color: #F84739;
+	font-size: 24px;
+	font-weight: 300;
 }
-@media (max-width: 991px) and (min-width: 500px) {
-	article#homepage .argument-image {
-		float:left;
-		clear:left;
-		margin-right: 20px;
-	}
+article#homepage .redline {
+	padding: 0;
+	margin-top: -2px;
+}
+article#homepage .redline span {
+	float: right;
+	width: 135px;
+	height: 2px;
+	background-color: #F51200;
+}
+article#homepage .arguments-col {
+	margin-top: 50px;
+}
+article#homepage .argument {
+	padding-top: 35px;
+}
+article#homepage .argument h3 {
+	margin-top: 30px;
+	font-weight: 300;
+	font-size: 26px;
+	text-transform: uppercase;
+	color: #31363F;
+}
+article#homepage .argument p {
+	line-height: 2;
+	font-size: 14px;
+	color: #596272;
 }
 article#homepage #pricewell {
 	text-align: center;
-	margin: 100px 0 80px;
-	font-size: 1.5em;
+	background-color: #F84639;
+	margin-top: 100px;
+	margin-bottom: 100px;
+	padding-top: 190px;
+	padding-bottom: 92px;
+	background-repeat: no-repeat;
+	background-position: center 92px;
+	color: white;
+	font-size: 36px;
+	text-transform: uppercase;
 }
-@media (min-width: 500px) {
-	article#homepage #pricewell {
-		margin-left: 50px;
-		margin-right: 50px;
+article#homepage #pricewell p {
+	margin: 0;
+}
+article#homepage #pricewell a {
+	text-transform: none;
+	padding: 25px 66px;
+	background-color: #C6352A;
+	color: white;
+	font-size: 21px;
+	border-radius: 3px;
+	margin: 30px 0 0;
+}
+@media (max-width: 992px) {
+	article#homepage #main-image {
+		height: 300px;
 	}
 }
 @media (max-width: 767px) {
-	article#homepage .jumbotron p {
-		font-size: 0.9em;
+	article#homepage #main-image {
+		height: 215px;
+	}
+	article#homepage .section-title {
+		margin-top: 50px;
+		padding-bottom: 30px;
+	}
+	article#homepage .section-title p {
+		font-size: 12px;
+		margin-top: 12px;
+	}
+	article#homepage .argument h3 {
+		margin-top: 25px;
+		margin-bottom: 20px;
+		font-size: 16px;
+	}
+	article#homepage .argument p {
+		font-size: 12px;
+		line-height: 2.2em;
+	}
+	article#homepage #pricewell {
+		margin-left: 18px;
+		margin-right: 18px;
+		background-position: center 37px;
+		margin-top: 40px;
+		margin-bottom: 45px;
+		padding-top: 95px;
+		padding-bottom: 40px;
+		font-size: 16px;
+	}
+	article#homepage #pricewell a {
+		margin-top: 20px;
+		border-radius: 2px;
+		font-size: 12px;
+		padding: 18px 32px;
+	}
+}
+@media (max-width: 500px) {
+	article#homepage #main-image {
+		background-position: -110px top;
 	}
 }
 
