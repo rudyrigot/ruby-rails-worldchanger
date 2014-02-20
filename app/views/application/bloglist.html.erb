@@ -6,7 +6,7 @@
 
 	<div class="container">
 
-		<% if @documents.empty? %>
+		<% if @documents.length == 0 %>
 			<div class="empty">
 				<h3>No document matches your search. Search again?</h3>
 				<%= render partial: "blogsearch" %>

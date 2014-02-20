@@ -11,7 +11,7 @@ module PrismicService
                      .query("[[:d = at(document.id, \"#{id}\")]]")
                      .submit(ref)
 
-      documents.empty? ? nil : documents.first
+      documents.length == 0 ? nil : documents.first
     end
 
     def access_token
