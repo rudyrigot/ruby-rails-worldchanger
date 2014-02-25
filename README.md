@@ -1,26 +1,19 @@
-## Prismic.io starter for Ruby on Rails
+## WorldChanger, Ruby on Rails example based on prismic.io
 
-This is a blank Rails project that will connect to any [prismic.io](https://prismic.io)
-repository. It uses the prismic.io Ruby developement kit, and provides few helpers
-to use it with Rails.
+This is a example project made by the prismic.io team as a showcase to help developers get started. By default, it consumes the content repository available at [https://worldchanger.prismic.io/api](https://worldchanger.prismic.io/api).
 
-### How to start?
+### Get started
 
-If you haven't yet, install the latest versions of [Ruby](https://www.ruby-lang.org/en/downloads/), [Rails](http://rubyonrails.org/download) and [RubyGems](http://rubygems.org/pages/download).
+This project gets started and installed exactly like the Rails starter project, you will find all information [in its README file](https://github.com/prismicio/ruby-rails-starter).
 
-After forking and cloning the starter kit, it is immediately operational, so you can launch your `rails server` command. You may have to update your gems by running `bundle install`, but Rails will tell you about it if you must.
+#### Connect it to your own WorldChanger repository
 
-The output of your `rails server` command tells you which URL to visit on your browser to see your brand new prismic.io Rails application.
+First, create your own WorldChanger content repository if you haven't: from your [prismic.io dashboard](https://prismic.io/dashboard/), click on the "Fork it now!" button in the "Fork the WorldChanger repository" frame.
 
-### Configuring
+Then, configure the project as described in the "Configure" paragraph of [the starter project's README file](https://github.com/prismicio/ruby-rails-starter).
 
-By default, the starter kit uses the public API of the "Les Bonnes Choses" repository; its endpoint is `https://lesbonneschoses.prismic.io/api`. You may want to start by editing the `config/prismic.yml` file to make your Rails application points to your prismic.io repository.
+Now, you can change content in your WorldChanger repository, and it will reflect in your local project.
 
-To get the OAuth configuration working, go to the Applications panel in your repository settings, and create an OAuth application to allow interactive sign-in. Just create a new application, fill the application name and the callback URL (localhost URLs are always authorized, so at development time you can omit to fill the Callback URL field), and copy/paste the clientId & clientSecret tokens into the `config/prismic.yml` file.
-
-### Iterating on this example
-
-If you want to iterate on this example (for instance: deploy it into a production environment, connect it to a local databse, discover the general-usage helpers and syntactic sugar, ...), it is based on [prismic.io's official Rails starter project](https://github.com/prismicio/ruby-rails-starter), so you may want to read its README file.
 
 ### Licence
 
