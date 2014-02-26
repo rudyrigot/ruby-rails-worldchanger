@@ -1,10 +1,11 @@
 <div class="panel-group" id="accordion">
 	<% @questions.each do |question| %>
-		<div class="panel panel-default">
+		<div class="panel">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#<%= question.id %>">
+					<a data-toggle="collapse" data-parent="#accordion" href="#<%= question.id %>" class="collapsed">
 						<%= question['faq.question'] ? question['faq.question'].as_text : '' %>
+						<span class="accordion-arrow down">&#9660;</span><span class="accordion-arrow up">&#9650;</span>
 					</a>
 				</h4>
 			</div>

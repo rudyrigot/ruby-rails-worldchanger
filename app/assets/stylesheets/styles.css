@@ -125,6 +125,54 @@ a.navbar-brand {
 	}
 }
 
+/* General accordion */
+#accordion .panel {
+	border-radius: 0;
+	box-shadow: 0 0 0;
+	border-top: 1px solid #DDDFE3;
+	border-bottom: 1px solid #DDDFE3;
+	margin-top: -1px;
+}
+#accordion .panel-title {
+	color: #F51200;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: 900;
+	letter-spacing: 1.5px;
+}
+#accordion .panel-title .accordion-arrow {
+	font-family: Arial, sans-serif;
+	color: #E1E1E1;
+	margin-right: 15px;
+	float: right;
+	font-size: 15px;
+}
+#accordion .panel-title .accordion-arrow.down {
+	display: none;
+}
+#accordion .panel-title .collapsed .accordion-arrow.up {
+	display: none;
+}
+#accordion .panel-title .collapsed .accordion-arrow.down {
+	display: block;
+}
+#accordion .panel-heading {
+	padding: 22px 0;
+}
+#accordion .panel-body {
+	border: 0;
+	color: #596272;
+	padding: 4px 0 24px;
+}
+@media (max-width: 767px) {
+	#accordion .panel-title {
+		font-size: 8px;
+	}
+	#accordion .panel-body {
+		font-size: 12px;
+	}
+}
+
 /* Homepage */
 article#homepage #main-image {
 	height: 500px;
@@ -194,6 +242,9 @@ article#homepage #pricewell a {
 	border-radius: 3px;
 	margin: 30px 0 0;
 }
+article#homepage #accordion {
+	margin: 54px 0 90px;
+}
 @media (max-width: 992px) {
 	article#homepage #main-image {
 		height: 300px;
@@ -235,6 +286,9 @@ article#homepage #pricewell a {
 		border-radius: 2px;
 		font-size: 12px;
 		padding: 18px 32px;
+	}	
+	article#homepage #accordion {
+		margin: 26px 0 50px;
 	}
 }
 @media (max-width: 500px) {

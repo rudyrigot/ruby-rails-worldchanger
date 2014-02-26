@@ -84,15 +84,7 @@
 
   <div class="container">
     <%= @document['homepage.title_faq'] ? @document['homepage.title_faq'].as_html_safe(link_resolver(@ref)) : '' %>
-    <div class="row">
-      <% @questions.each do |question| %>
-        <div class="col-md-3">
-          <h4><%= question['faq.question'] ? question['faq.question'].as_text : '' %></h4>
-          <%= question['faq.short_answer'] ? question['faq.short_answer'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
-          <%= link_to "#{question['faq.link_label'] ? question['faq.link_label'].as_text : ''} »", link_resolver(@maybe_ref).link_to(question) %>
-        </div>
-      <% end %>
-    </div>
+    <%= render partial: "faqaccordion", locals: { questions: @questions } %>
   </div>
 
 </article>
