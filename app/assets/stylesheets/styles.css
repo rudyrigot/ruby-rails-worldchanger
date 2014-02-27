@@ -1,17 +1,23 @@
 body, h1, h2, h3, h4, h5, h6 {
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
+	color: #596272;
+}
+h1 {
+	text-transform: uppercase;
+	font-weight: 300;
 }
 h2 {
 	margin: 0;
 	text-transform: uppercase;
-	color: #262626;
 	font-size: 26px;
+}
+h1, h2, h3, h4, h5, h6 {
+	color: #262626;
 }
 .footer-container {
 	padding: 55px 0 45px;
 	background-color: #FBFBFB;
-	color: #596272;
 }
 footer a {
 	color: #F51200;
@@ -88,9 +94,6 @@ a.navbar-brand {
 }
 .page-title h1 {
 	margin: 0;
-	text-transform: uppercase;
-	font-weight: 300;
-	color: #262626;
 }
 .page-title p {
 	margin: 25px 0 0;
@@ -161,7 +164,6 @@ a.navbar-brand {
 }
 #accordion .panel-body {
 	border: 0;
-	color: #596272;
 	padding: 4px 0 24px;
 }
 @media (max-width: 767px) {
@@ -215,7 +217,6 @@ article#homepage .argument h3 {
 article#homepage .argument p {
 	line-height: 2;
 	font-size: 14px;
-	color: #596272;
 }
 article#homepage #pricewell {
 	text-align: center;
@@ -312,22 +313,63 @@ article#tour .photo img {
 
 /* Pricing */
 article#pricing .plans {
-	text-align: center;
-	margin-bottom: 50px;
+	border-top: 1px solid #DDDFE3;
+	margin-bottom: 90px;
 }
-article#pricing .plan {
-	margin-bottom: 20px;
+article#pricing .plans .plan {
+	margin-top: 90px;
+	padding-top: 35px;
+	background-position: 15px top;
+	background-repeat: no-repeat;
 }
-article#pricing .planframe {
-	margin: 0 10px;
-	padding: 10px;
-	border-radius: 40px;
-	box-shadow: 5px 5px 5px #888888;
+article#pricing .plans .plan h2 {
+	margin-bottom: 10px;
+}
+article#pricing .plans .plan p.price {
+	color: #262626;
+	font-weight: 100;
+	font-size: 61px;
+}
+article#pricing .btn-pricing {
+	color: #F51200;
+	text-transform: uppercase;
+	font-size: 12px;
+	border-color: #9198A4;
+	font-weight: 900;
+	letter-spacing: 1.5px;
+	padding: 15px 38px;
+	margin-top: 10px;
+}
+article#pricing #accordion {
+	margin-bottom: 75px;
+}
+@media (max-width: 767px) {
+	article#pricing .plans {
+		margin-bottom: 50px;
+	}
+	article#pricing .plans .plan {
+		margin-top: 50px;
+		padding-top: 0;
+		background-position: 15px 12px;
+	}
+	article#pricing .plans .plan p {
+		font-size: 12px;
+	}
+	article#pricing .plans .plan p.price {
+		font-size: 40px;
+		text-align: center;
+	}
+}
+@media (max-width: 450px) {
+	article#pricing .plans .plan p.price {
+		text-align: right;
+	}
 }
 
 /* About us */
 article#about .staff {
 	text-align: center;
+	margin-bottom: 100px;
 }
 article#about .title {
 	font-style: italic;
@@ -336,10 +378,17 @@ article#about .title {
 @media (max-width: 991px) {
 	article#about .photo {
 		float: left;
+		padding-right: 20px;
 	}
 	article#about .staff {
 		clear: left;
+		margin-bottom: 30px;
 	}
+}
+
+/* FAQ */
+article#faq #accordion {
+	margin-bottom: 80px
 }
 
 /* Blog nav */
@@ -440,4 +489,10 @@ article#about .title {
 }
 #blogpost p.image img {
 	max-width: 100%;
+}
+#blogpost h4 {
+	margin-top: 30px;
+}
+#blogpost ul#relatedposts {
+	margin-bottom: 50px;
 }

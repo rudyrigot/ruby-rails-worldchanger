@@ -11,7 +11,7 @@
 		<div class="row">
 			<% @staff.each do |staff_member| %>
 
-				<div class="col-md-3 staff" id="<%= staff_member.id %>">
+				<div class="col-md-3 staff clearfix" id="<%= staff_member.id %>">
 					<p class="photo">
 						<span data-picture>
 							<span data-src="<%= staff_member['author.photo'] && staff_member['author.photo'].get_view("large") ? staff_member['author.photo'].get_view("large").url : '' %>"></span>

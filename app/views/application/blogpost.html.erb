@@ -30,7 +30,7 @@
 
 		<% if @relatedposts && !@relatedposts.empty? %>
 			<h4>Some related posts from our blog</h4>
-			<ul>
+			<ul id="relatedposts">
 				<% @relatedposts.each do |post| %>
 					<li><%= link_to post.first_title, link_resolver(@maybe_ref).link_to(post) %></li>
 				<% end %>

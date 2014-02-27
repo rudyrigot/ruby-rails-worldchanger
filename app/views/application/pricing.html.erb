@@ -11,15 +11,12 @@
 		<div class="row plans">
 			<% @plans.each do |plan| %>
 
-				<div class="col-md-4 plan">
-					<div class="planframe" style="background-color: #<%= plan['pricing.color'] ? plan['pricing.color'].value : 'ffffff' %>">
-						<h2><%= plan['pricing.name'] ? plan['pricing.name'].as_text : '' %></h2>
-						<h4>Best for:</h4>
-						<%= plan['pricing.bestfor'] ? plan['pricing.bestfor'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
-						<h2>$<%= plan['pricing.price'] ? plan['pricing.price'].value.to_i : '' %> /mo</h2>
-						<p>Get <%= plan['pricing.magnitude'] ? plan['pricing.magnitude'].value.to_i : '' %>% of your world changed.</p>
-						<p><%= link_to "Learn more", tour_path(ref: @maybe_ref), :class => "btn btn-primary" %></p>
-					</div>
+				<div class="col-sm-4 plan" style="background-image: url('<%= plan['pricing.image'].get_view('icon').url %>')">
+					<p class="price">$<%= plan['pricing.price'] ? plan['pricing.price'].value.to_i : '' %>/mo</p>
+					<h2><%= plan['pricing.name'] ? plan['pricing.name'].as_text : '' %></h2>
+					<p><%= plan['pricing.bestfor'] ? plan['pricing.bestfor'].as_text.capitalize : '' %></p>
+					<p>Get <%= plan['pricing.magnitude'] ? plan['pricing.magnitude'].value.to_i : '' %>% of your world changed.</p>
+					<p><%= link_to "Learn more", tour_path(ref: @maybe_ref), :class => "btn btn-pricing" %></p>
 				</div>
 
 			<% end %>
