@@ -71,7 +71,7 @@
 
   <div class="container">
     <%= @document['homepage.title_faq'] ? @document['homepage.title_faq'].as_html_safe(link_resolver(@ref)) : '' %>
-    <%= render partial: "faqaccordion", locals: { questions: @questions } %>
+    <%= render partial: "faqaccordion", locals: { questions: @questions, first_open: false } %>
   </div>
 
 </article>
