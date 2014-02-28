@@ -13,19 +13,11 @@ class ApplicationController < ActionController::Base
                     .query(%([[:d = at(document.tags, ["design"])][:d = at(document.tags, ["featured"])]]))
                     .orderings("[my.argument.priority desc]")
                     .submit(@ref)
-    @plans_by_price = api.form("plans")
-                    .orderings("[my.pricing.price]")
-                    .submit(@ref)
-    begin
-        @minimum_price = @plans_by_price[0]['pricing.price'].value.to_i
-    rescue
-    	logger.info("Minimum requirements to display the minimum price are not met (is there any plan published right now?)")
-    	@minimum_price = 0
-    end
     @questions = api.form("questions")
                     .query(%([[:d = at(document.tags, ["featured"])]]))
                     .orderings("[my.faq.priority desc]")
                     .submit(@ref)
+    set_minimum_price
   end
 
   def tour
@@ -33,6 +25,8 @@ class ApplicationController < ActionController::Base
     @arguments = api.form("arguments")
                     .orderings("[my.argument.priority desc]")
                     .submit(@ref)
+    @homepage = PrismicService.get_document(api.bookmark("homepage"), api, @ref)
+    set_minimum_price
   end
 
   def pricing
@@ -113,6 +107,18 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_minimum_price
+    plans_by_price = api.form("plans")
+      .orderings("[my.pricing.price]")
+      .submit(@ref)
+    begin
+      @minimum_price = plans_by_price[0]['pricing.price'].value.to_i
+    rescue
+      logger.info("Minimum requirements to display the minimum price are not met (is there any plan published right now?)")
+      @minimum_price = 0
+    end
+  end
 
   # Before_action
   def set_ref

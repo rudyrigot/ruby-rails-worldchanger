@@ -3,7 +3,7 @@
   <div class="container">
 
     <div class="page-title">
-      
+
       <%= @document['homepage.headline'] ? @document['homepage.headline'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 
       <%= @document['homepage.description'] ? @document['homepage.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
@@ -67,20 +67,7 @@
     </div>
   </div>
 
-  <div class="container" id="pricewell">
-    <p><%= @document['homepage.pricing_label'] ? @document['homepage.pricing_label'].as_text : '' %> <strong>$<%= @minimum_price %>/mo</strong></p>
-    <p><%= link_to (@document['homepage.pricing_button_label'] ? @document['homepage.pricing_button_label'].as_text : ''), pricing_path(ref: @maybe_ref), :class => "btn btn-pricing", :role => "button" %></p>
-  </div>
-  <style type="text/css">
-    #pricewell {
-      background-image: url('<%= @document['homepage.pricing_image'] && @document['homepage.pricing_image'].get_view('small') ? @document['homepage.pricing_image'].get_view('small').url : '' %>')
-    }
-    @media (max-width: 767px) {
-      #pricewell {
-        background-image: url('<%= @document['homepage.pricing_image'] && @document['homepage.pricing_image'].get_view('icon') ? @document['homepage.pricing_image'].get_view('icon').url : '' %>')
-      }
-    }
-  </style>
+  <%= render partial: "minimumplans", locals: { homepage: @document } %>
 
   <div class="container">
     <%= @document['homepage.title_faq'] ? @document['homepage.title_faq'].as_html_safe(link_resolver(@ref)) : '' %>

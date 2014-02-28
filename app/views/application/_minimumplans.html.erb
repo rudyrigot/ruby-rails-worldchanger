@@ -1,0 +1,14 @@
+<div class="container" id="pricewell">
+  <p><%= homepage['homepage.pricing_label'] ? homepage['homepage.pricing_label'].as_text : '' %> <strong>$<%= @minimum_price %>/mo</strong></p>
+  <p><%= link_to (homepage['homepage.pricing_button_label'] ? homepage['homepage.pricing_button_label'].as_text : ''), pricing_path(ref: @maybe_ref), :class => "btn btn-pricing", :role => "button" %></p>
+</div>
+<style type="text/css">
+  #pricewell {
+    background-image: url('<%= homepage['homepage.pricing_image'] && homepage['homepage.pricing_image'].get_view('small') ? homepage['homepage.pricing_image'].get_view('small').url : '' %>')
+  }
+  @media (max-width: 767px) {
+    #pricewell {
+      background-image: url('<%= homepage['homepage.pricing_image'] && homepage['homepage.pricing_image'].get_view('icon') ? homepage['homepage.pricing_image'].get_view('icon').url : '' %>')
+    }
+  }
+</style>

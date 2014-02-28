@@ -11,9 +11,17 @@ h2 {
 	margin: 0;
 	text-transform: uppercase;
 	font-size: 26px;
+	margin-bottom: 20px;
 }
 h1, h2, h3, h4, h5, h6 {
 	color: #262626;
+}
+a {
+	color : #F51200;
+}
+p {
+	font-size: 14px;
+	line-height: 2;
 }
 .footer-container {
 	padding: 55px 0 45px;
@@ -25,6 +33,11 @@ footer a {
 @media (max-width: 767px) {
 	h2 {
 		font-size: 16px;
+		margin-bottom: 20px;
+	}
+	p {
+		font-size:12px;
+		line-height: 2.2em;
 	}
 	.footer-container {
 		font-size: 12px;
@@ -90,7 +103,6 @@ a.navbar-brand {
 	margin: 75px 0;
 	text-align: center;
 	font-weight: 300;
-	font-size: 24px;
 }
 .page-title h1 {
 	margin: 0;
@@ -99,6 +111,7 @@ a.navbar-brand {
 	margin: 25px 0 0;
 	line-height: 1.8em;
 	color: #586272;
+	font-size: 24px;
 }
 .page-title .cta_homelink {
 	font-weight: 900;
@@ -214,11 +227,7 @@ article#homepage .argument h3 {
 	text-transform: uppercase;
 	color: #31363F;
 }
-article#homepage .argument p {
-	line-height: 2;
-	font-size: 14px;
-}
-article#homepage #pricewell {
+#pricewell {
 	text-align: center;
 	background-color: #F84639;
 	margin-top: 100px;
@@ -231,10 +240,11 @@ article#homepage #pricewell {
 	font-size: 36px;
 	text-transform: uppercase;
 }
-article#homepage #pricewell p {
+#pricewell p {
 	margin: 0;
+	font-size: 36px;
 }
-article#homepage #pricewell a {
+#pricewell a {
 	text-transform: none;
 	padding: 25px 66px;
 	background-color: #C6352A;
@@ -268,11 +278,7 @@ article#homepage #accordion {
 		margin-bottom: 20px;
 		font-size: 16px;
 	}
-	article#homepage .argument p {
-		font-size: 12px;
-		line-height: 2.2em;
-	}
-	article#homepage #pricewell {
+	#pricewell {
 		margin-left: 18px;
 		margin-right: 18px;
 		background-position: center 37px;
@@ -282,12 +288,12 @@ article#homepage #accordion {
 		padding-bottom: 40px;
 		font-size: 16px;
 	}
-	article#homepage #pricewell a {
+	#pricewell a {
 		margin-top: 20px;
 		border-radius: 2px;
 		font-size: 12px;
 		padding: 18px 32px;
-	}	
+	}
 	article#homepage #accordion {
 		margin: 26px 0 50px;
 	}
@@ -299,15 +305,142 @@ article#homepage #accordion {
 }
 
 /* Tour */
-article#tour .argument {
-	margin-bottom: 50px;
+article#tour .large-image {
+	color: white;
 }
-article#tour .photo img {
-	max-width: 100%;
+article#tour .large-image h2 {
+	color: white;
+	font-size: 26px;
 }
-@media (max-width: 768px) {
-	article#tour .photo {
+article#tour .large-bright-image {
+	height: 500px;
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-top: 300px;
+}
+article#tour .half-regular {
+	margin-top: 80px;
+}
+article#tour .half-regular h2 {
+	font-size: 20px;
+	font-weight: 300;
+}
+article#tour .half-regular p {
+	line-height: 1.7em;
+	margin-bottom: 0;
+}
+article#tour .half-regular .icon {
+	position: absolute;
+	left: -60px;
+	top: -5px;
+}
+article#tour .large-dark-image {
+	text-align: center;
+	background-repeat: no-repeat;
+	background-position: center top;
+	padding-top: 100px;
+	margin-top: 80px;
+}
+article#tour .large-dark-image h2 {
+	font-weight: 300;
+}
+article#tour .large-dark-image .container {
+	background-color: #000000;
+	background-color: rgba(0, 0, 0, 0.75);
+	padding: 85px 10% 65px;
+}
+article#tour .regular-panels {
+	background: repeat-y url('/assets/panels-background.png') center top;
+}
+article#tour .regular-panel {
+	text-align: center;
+	padding: 75px 5% 50px;
+}
+article#tour .regular-panel h2 {
+	font-size: 20px;
+	font-weight: 300;
+}
+article#tour .regular-panel p {
+	margin-bottom: 0;
+}
+article#tour .regular {
+	text-align:center;
+	background-repeat: no-repeat;
+	background-position: center 60px;
+	padding-top: 130px;
+}
+article#tour .regular h2 {
+	font-size: 20px;
+	font-weight: 300;
+}
+article#tour .regular p {
+	margin-bottom: 0;
+}
+@media (max-width: 1200px) {
+	article#tour .large-bright-image {
+		padding-top: 250px;
+	}
+}
+@media (max-width: 992px) {
+	article#tour .large-bright-image {
+		height: 250px;
+		padding-top: 15px;
+	}
+	article#tour .half-regular .icon {
+		left: -40px;
+	}
+	article#tour .large-dark-image {
+		padding-top: 70px;
+	}
+	article#tour .large-dark-image .container {
+		padding: 50px 5% 25px;
+	}
+}
+@media (max-width: 767px) {
+	article#tour .large-bright-image {
+		height: auto;
+		padding: 0;
 		text-align: center;
+	}
+	article#tour .large-bright-image .row {
+		background-color: #000000;
+		background-color: rgba(0, 0, 0, 0.75);
+		padding: 50px 5% 25px;
+	}
+	article#tour .half-regular {
+		margin-top: 50px;
+	}
+	article#tour .half-regular h2 {
+		font-size: 16px;
+		margin-top: 25px;
+		margin-bottom: 20px;
+	}
+	article#tour .half-regular p {
+		line-height: 2.2em;
+	}
+	article#tour .half-regular .icon {
+		position: relative;
+		left: 0;
+		top: 0;
+	}
+	article#tour .large-dark-image {
+		padding-top: 0;
+	}
+	article#tour .regular-panels {
+		background: none;
+	}
+	article#tour .regular-panel {
+		text-align: left;
+		padding: 0 15px;
+		margin-top: 50px;
+	}
+	article#tour .regular-panel h2 {
+		font-size: 16px;
+	}
+}
+@media (max-width: 500px) {
+	article#tour .large-bright-image {
+		height: 150px;
 	}
 }
 
@@ -321,9 +454,6 @@ article#pricing .plans .plan {
 	padding-top: 35px;
 	background-position: 15px top;
 	background-repeat: no-repeat;
-}
-article#pricing .plans .plan h2 {
-	margin-bottom: 10px;
 }
 article#pricing .plans .plan p.price {
 	color: #262626;

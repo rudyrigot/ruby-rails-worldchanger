@@ -1,8 +1,0 @@
-<span data-picture>
-	<span data-src="<%= image.get_view("small") ? image.get_view("small").url : '' %>"></span>
-    <span data-src="<%= image.get_view("medium") ? image.get_view("medium").url : '' %>" data-media="(min-width: 767px)"></span>
-    <span data-src="<%= image.get_view("large") ? image.get_view("large").url : '' %>" data-media="(min-width: 992px)"></span>
-    <noscript>
-        <img src="<%= image.get_view("small") ? image.get_view("small").url : '' %>">
-	</noscript>
-</span>
