@@ -11,7 +11,7 @@
 			</div>
 			<div id="<%= question.id %>" class="panel-collapse collapse<%= first_open && i==0 ? ' in' : '' %>">
 				<div class="panel-body">
-					<%= question['faq.answer'] ? question['faq.answer'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+					<%= question['faq.answer'] ? question['faq.answer'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 				</div>
 			</div>
 

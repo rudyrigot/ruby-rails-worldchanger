@@ -14,10 +14,10 @@
 		<% end %>
 
 		<% @documents.each do |document| %>
-			<a href="<%= blogpost_path(document.id, document.slug, ref: @maybe_ref) %>" class="row blog-post">
+			<a href="<%= blogpost_path(document.id, document.slug, ref: maybe_ref) %>" class="row blog-post">
 				<div class="col-md-3 col-md-offset-2 image">
 					<p>
-						<%= document['blog.image'] && document['blog.image'].get_view('medium') ? document['blog.image'].get_view('medium').as_html_safe(link_resolver(@maybe_ref)) : '' %>
+						<%= document['blog.image'] && document['blog.image'].get_view('medium') ? document['blog.image'].get_view('medium').as_html_safe(link_resolver(maybe_ref)) : '' %>
 					</p>
 				</div>
 				<div class="col-md-5 preview">
@@ -27,7 +27,7 @@
 					<p class="date">
 						On <%= document['blog.date'] ? document['blog.date'].value.strftime("%b %-d %Y") : '' %>
 					</p>
-					<%= document['blog.shortlede'] ? document['blog.shortlede'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+					<%= document['blog.shortlede'] ? document['blog.shortlede'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 				</div>
 			</a>
 		<% end %>

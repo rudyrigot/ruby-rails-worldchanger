@@ -4,11 +4,11 @@
 
     <div class="page-title">
 
-      <%= @document['homepage.headline'] ? @document['homepage.headline'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+      <%= @document['homepage.headline'] ? @document['homepage.headline'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 
-      <%= @document['homepage.description'] ? @document['homepage.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+      <%= @document['homepage.description'] ? @document['homepage.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 
-      <p class="cta_homelink"><%= link_to "#{@document['homepage.cta_label'] ? @document['homepage.cta_label'].as_text : ''}", tour_path(ref: @maybe_ref), :role => "button" %></p>
+      <p class="cta_homelink"><%= link_to "#{@document['homepage.cta_label'] ? @document['homepage.cta_label'].as_text : ''}", tour_path(ref: maybe_ref), :role => "button" %></p>
 
     </div>
 
@@ -31,7 +31,7 @@
   <% end %>
 
   <div class="container section-title">
-    <%= @document['homepage.title_user_friendly'].as_html_safe(link_resolver(@maybe_ref)) %>
+    <%= @document['homepage.title_user_friendly'].as_html_safe(link_resolver(maybe_ref)) %>
   </div>
   <div class="container redline"><span></span></div>
 
@@ -41,7 +41,7 @@
         <div class="col-md-4 arguments-col">
           <div class="argument" style="background: url('<%= argument['argument.icon'] && argument['argument.icon'].get_view('small') ? argument['argument.icon'].get_view('small').url : '' %>') no-repeat">
             <h3><%= argument['argument.catcher_title'] ? argument['argument.catcher_title'].as_text : '' %></h3>
-            <%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+            <%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
           </div>
         </div>
       <% end %>
@@ -50,7 +50,7 @@
 
 
   <div class="container section-title">
-    <%= @document['homepage.title_design'] ? @document['homepage.title_design'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+    <%= @document['homepage.title_design'] ? @document['homepage.title_design'].as_html_safe(link_resolver(maybe_ref)) : '' %>
   </div>
   <div class="container redline"><span></span></div>
 
@@ -60,7 +60,7 @@
         <div class="col-md-4 arguments-col">
           <div class="argument" style="background: url('<%= argument['argument.icon'] && argument['argument.icon'].get_view('small') ? argument['argument.icon'].get_view('small').url : '' %>') no-repeat">
             <h3><%= argument['argument.catcher_title'] ? argument['argument.catcher_title'].as_text : '' %></h3>
-            <%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+            <%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
           </div>
         </div>
       <% end %>
@@ -70,7 +70,7 @@
   <%= render partial: "minimumplans", locals: { homepage: @document } %>
 
   <div class="container">
-    <%= @document['homepage.title_faq'] ? @document['homepage.title_faq'].as_html_safe(link_resolver(@ref)) : '' %>
+    <%= @document['homepage.title_faq'] ? @document['homepage.title_faq'].as_html_safe(link_resolver(ref)) : '' %>
     <%= render partial: "faqaccordion", locals: { questions: @questions, first_open: false } %>
   </div>
 
