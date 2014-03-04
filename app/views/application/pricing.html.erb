@@ -3,8 +3,8 @@
 	<div class="container">
 
 		<div class="page-title">
-			<%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
-			<%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+			<%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+			<%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 		</div>
 
 
@@ -16,7 +16,7 @@
 					<h2><%= plan['pricing.name'] ? plan['pricing.name'].as_text : '' %></h2>
 					<p><%= plan['pricing.bestfor'] ? plan['pricing.bestfor'].as_text.capitalize : '' %></p>
 					<p>Get <%= plan['pricing.magnitude'] ? plan['pricing.magnitude'].value.to_i : '' %>% of your world changed.</p>
-					<p><%= link_to "Learn more", tour_path(ref: @maybe_ref), :class => "btn btn-pricing" %></p>
+					<p><%= link_to "Learn more", tour_path(ref: maybe_ref), :class => "btn btn-pricing" %></p>
 				</div>
 
 			<% end %>

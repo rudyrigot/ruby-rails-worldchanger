@@ -3,8 +3,8 @@
 	<div class="container">
 
 		<div class="page-title">
-			<%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
-			<%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+			<%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+			<%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 		</div>
 
 	</div>
@@ -32,7 +32,7 @@
 				<div class="row">
 					<div class="col-sm-5 col-sm-offset-7">
 						<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
-						<%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+						<%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 					</div>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 			<div id="<%= argument.id %>" class="half-regular col-sm-5 col-sm-offset-1">
 				<img class="icon" src="<%= argument['argument.icon'] && argument['argument.icon'].get_view('small') ? argument['argument.icon'].get_view('small').url : '' %>">
 				<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
-				<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+				<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 			</div>
 
 			<% if stage == :one_after_large_bright_image %>
@@ -72,7 +72,7 @@
 				</style>
 				<div class="container">
 					<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
-					<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+					<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 				</div>
 			</div>
 			<% stage = :right_after_large_dark_image %>
@@ -87,7 +87,7 @@
 
 			<div id="<%= argument.id %>" class="regular-panel col-sm-6">
 				<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
-				<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+				<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 			</div>
 
 			<% if stage == :one_after_large_dark_image %>
@@ -100,7 +100,7 @@
 			<%# Other cases %>
 			<div id="<%= argument.id %>" class="container regular" style="background-image: url('<%= argument['argument.icon'] && argument['argument.icon'].get_view('small') ? argument['argument.icon'].get_view('small').url : '' %>')">
 				<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
-				<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+				<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 			</div>
 		<% end %>
 

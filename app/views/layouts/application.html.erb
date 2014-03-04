@@ -27,12 +27,12 @@
     </div>
     <div class="navbar-collapse collapse" id="top-navbar">
       <ul class="nav navbar-nav navbar-right">
-        <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path(ref: @maybe_ref) %></li>
-        <li <% if @document.try(:id) == api.bookmark('tour') %>class="active"<% end %>><%= link_to "Product tour", tour_path(ref: @maybe_ref) %></li>
-        <li <% if @document.try(:id) == api.bookmark('pricing') %>class="active"<% end %>><%= link_to "Pricing", pricing_path(ref: @maybe_ref) %></li>
-        <li <% if @document.try(:id) == api.bookmark('faq') %>class="active"<% end %>><%= link_to "FAQ", faq_path(ref: @maybe_ref) %></li>
-        <li <% if @document.try(:id) == api.bookmark('about') %>class="active"<% end %>><%= link_to "About us", about_path(ref: @maybe_ref) %></li>
-        <li <% if ['blog', 'blogcategory', 'blogsearch', 'blogpost'].include?(params[:action]) %>class="active"<% end %>><%= link_to "Blog", blog_path(ref: @maybe_ref) %></li>
+        <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path(ref: maybe_ref) %></li>
+        <li <% if @document.try(:id) == api.bookmark('tour') %>class="active"<% end %>><%= link_to "Product tour", tour_path(ref: maybe_ref) %></li>
+        <li <% if @document.try(:id) == api.bookmark('pricing') %>class="active"<% end %>><%= link_to "Pricing", pricing_path(ref: maybe_ref) %></li>
+        <li <% if @document.try(:id) == api.bookmark('faq') %>class="active"<% end %>><%= link_to "FAQ", faq_path(ref: maybe_ref) %></li>
+        <li <% if @document.try(:id) == api.bookmark('about') %>class="active"<% end %>><%= link_to "About us", about_path(ref: maybe_ref) %></li>
+        <li <% if ['blog', 'blogcategory', 'blogsearch', 'blogpost'].include?(params[:action]) %>class="active"<% end %>><%= link_to "Blog", blog_path(ref: maybe_ref) %></li>
       </ul>
     </div><!--/.navbar-collapse -->
   </div>
@@ -46,14 +46,14 @@
           </div>
           <div class="form-group">
             <select id="releaseSelector" name="ref" onchange="this.form.submit()" class="form-control">
-              <% if !api.refs.map{|_,r| r.ref }.include?(@ref) %>
+              <% if !api.refs.map{|_,r| r.ref }.include?(ref) %>
                 <option>?</option>
               <% end %>
-              <option value="" <% if @ref == api.master %>selected="selected"<% end %>>As currently seen by guest visitors</option>
+              <option value="" <% if ref == api.master %>selected="selected"<% end %>>As currently seen by guest visitors</option>
               <optgroup label="Or preview the website in a future release:">
-                <% api.refs.reject{|_,r| r.master? }.each do |_, ref| %>
-                  <option value="<%= ref.ref %>" <% if @ref == ref.ref %>selected="selected"<% end %>>
-                    As <%= ref.label %> <%= ref.scheduled_at && ref.scheduled_at.strftime("%Y-%m-%d") %>
+                <% api.refs.reject{|_,r| r.master? }.each do |_, r| %>
+                  <option value="<%= r.ref %>" <% if ref == r.ref %>selected="selected"<% end %>>
+                    As <%= r.label %> <%= r.scheduled_at.try(:strftime, "%Y-%m-%d") %>
                   </option>
                 <% end %>
               </optgroup>
