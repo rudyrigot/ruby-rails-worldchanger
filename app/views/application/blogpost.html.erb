@@ -18,7 +18,7 @@
 			<br>
 			by
 			<% if @author.tags.include?("staff") %>
-				<%= link_to @author['author.fullname'] ? @author['author.fullname'].as_text : '', about_path(ref: @maybe_ref) + "#" + @author.id %>,
+				<%= link_to @author['author.fullname'] ? @author['author.fullname'].as_text : '', about_path(ref: maybe_ref) + "#" + @author.id %>,
 			<% else %>
 				<%= @author['author.fullname'] ? @author['author.fullname'].as_text : '' %>,
 			<% end %>
@@ -26,13 +26,13 @@
 			<%= @author['author.title'] ? @author['author.title'].as_text : '' %><%= @author['author.company'] ? ", " + @author['author.company'].as_text : '' %>
 		</div>
 
-		<%= @document['blog.body'].as_html_safe(link_resolver(@ref)) %>
+		<%= @document['blog.body'].as_html_safe(link_resolver(ref)) %>
 
 		<% if @relatedposts && !@relatedposts.empty? %>
 			<h4>Some related posts from our blog</h4>
 			<ul id="relatedposts">
 				<% @relatedposts.each do |post| %>
-					<li><%= link_to post.first_title, link_resolver(@maybe_ref).link_to(post) %></li>
+					<li><%= link_to post.first_title, link_resolver(maybe_ref).link_to(post) %></li>
 				<% end %>
 			</ul>
 		<% end %>
@@ -53,7 +53,7 @@
 		    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 		    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 	    <% end %>
-	    
+
 
 	</div>
 
