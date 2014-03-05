@@ -1,3 +1,6 @@
+body{
+	background: #F5F5F5;
+}
 body, h1, h2, h3, h4, h5, h6 {
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
@@ -30,6 +33,9 @@ p {
 footer a {
 	color: #F51200;
 }
+#top-navbar{
+	border-bottom: 1px solid #F1F2F5;
+}
 @media (max-width: 767px) {
 	h2 {
 		font-size: 16px;
@@ -45,14 +51,21 @@ footer a {
 		padding: 50px 0 20px;
 	}
 }
-
+.wrapper{
+	max-width: 1280px;
+	margin: 0 auto;
+	background: #fff;
+}
+.container{
+	max-width: 1024px;
+}
 /* Navigation bar */
 .navbar-worldchanger {
 	margin-bottom: 0;
 	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 12px;
-	border: 1px solid #DDDFE3;
+	border-radius: 0;
 }
 .navbar-brand, .navbar-nav>li>a {
 	padding-top: 42px;
@@ -106,6 +119,7 @@ a.navbar-brand {
 }
 .page-title h1 {
 	margin: 0;
+	line-height: 57px;
 }
 .page-title p {
 	margin: 25px 0 0;
@@ -145,8 +159,8 @@ a.navbar-brand {
 #accordion .panel {
 	border-radius: 0;
 	box-shadow: 0 0 0;
-	border-top: 1px solid #DDDFE3;
-	border-bottom: 1px solid #DDDFE3;
+	border-top: 1px solid #F1F2F5;
+	border-bottom: 1px solid #F1F2F5;
 	margin-top: -1px;
 }
 #accordion .panel-title {
@@ -196,7 +210,7 @@ article#homepage #main-image {
 article#homepage .section-title {
 	margin-top: 70px;
 	padding-bottom: 50px;
-	border-bottom: 1px solid #DDDFE3;
+	border-bottom: 1px solid #F1F2F5;
 }
 article#homepage .section-title p {
 	margin: 5px 0 0;
@@ -262,6 +276,9 @@ article#homepage #accordion {
 	}
 }
 @media (max-width: 767px) {
+	.navbar-header{
+		border-bottom: 1px solid #F1F2F5;
+	}
 	article#homepage #main-image {
 		height: 215px;
 	}
@@ -446,7 +463,7 @@ article#tour .regular p {
 
 /* Pricing */
 article#pricing .plans {
-	border-top: 1px solid #DDDFE3;
+	border-top: 1px solid #F1F2F5;
 	margin-bottom: 90px;
 }
 article#pricing .plans .plan {
@@ -515,6 +532,15 @@ article#about .title {
 		margin-bottom: 30px;
 	}
 }
+.picture{
+	border-radius: 50%;
+	height: 200px;
+	width: 200px;
+	display: block;
+	margin: 0 auto;
+	overflow: hidden;
+	border: 1px solid #F1F2F5;
+} 
 
 /* FAQ */
 article#faq #accordion {
@@ -563,6 +589,7 @@ article#faq #accordion {
 }
 #blog-list .preview .date {
 	font-style: italic;
+	color: #ccc;
 }
 #blog-list .blog-post {
 	padding-bottom: 10px;

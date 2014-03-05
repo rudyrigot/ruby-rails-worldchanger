@@ -15,12 +15,12 @@
 
 		<% @documents.each do |document| %>
 			<a href="<%= blogpost_path(document.id, document.slug, ref: maybe_ref) %>" class="row blog-post">
-				<div class="col-md-3 col-md-offset-2 image">
+				<div class="col-md-3 image">
 					<p>
 						<%= document['blog.image'] && document['blog.image'].get_view('medium') ? document['blog.image'].get_view('medium').as_html_safe(link_resolver(maybe_ref)) : '' %>
 					</p>
 				</div>
-				<div class="col-md-5 preview">
+				<div class="col-md-9 preview">
 					<h2>
 						<%= document.first_title %>
 					</h2>
