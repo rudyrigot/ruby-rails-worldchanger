@@ -13,70 +13,71 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<header class="navbar navbar-worldchanger" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "WorldChanger", root_path, :class => "navbar-brand" %>
+<div class="wrapper">
+  <header class="navbar navbar-worldchanger" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to "WorldChanger", root_path, :class => "navbar-brand" %>
+      </div>
+      <div class="navbar-collapse collapse" id="top-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path(ref: @maybe_ref) %></li>
+          <li <% if @document.try(:id) == api.bookmark('tour') %>class="active"<% end %>><%= link_to "Product tour", tour_path(ref: @maybe_ref) %></li>
+          <li <% if @document.try(:id) == api.bookmark('pricing') %>class="active"<% end %>><%= link_to "Pricing", pricing_path(ref: @maybe_ref) %></li>
+          <li <% if @document.try(:id) == api.bookmark('faq') %>class="active"<% end %>><%= link_to "FAQ", faq_path(ref: @maybe_ref) %></li>
+          <li <% if @document.try(:id) == api.bookmark('about') %>class="active"<% end %>><%= link_to "About us", about_path(ref: @maybe_ref) %></li>
+          <li <% if ['blog', 'blogcategory', 'blogsearch', 'blogpost'].include?(params[:action]) %>class="active"<% end %>><%= link_to "Blog", blog_path(ref: @maybe_ref) %></li>
+        </ul>
+      </div><!--/.navbar-collapse -->
     </div>
-    <div class="navbar-collapse collapse" id="top-navbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path(ref: @maybe_ref) %></li>
-        <li <% if @document.try(:id) == api.bookmark('tour') %>class="active"<% end %>><%= link_to "Product tour", tour_path(ref: @maybe_ref) %></li>
-        <li <% if @document.try(:id) == api.bookmark('pricing') %>class="active"<% end %>><%= link_to "Pricing", pricing_path(ref: @maybe_ref) %></li>
-        <li <% if @document.try(:id) == api.bookmark('faq') %>class="active"<% end %>><%= link_to "FAQ", faq_path(ref: @maybe_ref) %></li>
-        <li <% if @document.try(:id) == api.bookmark('about') %>class="active"<% end %>><%= link_to "About us", about_path(ref: @maybe_ref) %></li>
-        <li <% if ['blog', 'blogcategory', 'blogsearch', 'blogpost'].include?(params[:action]) %>class="active"<% end %>><%= link_to "Blog", blog_path(ref: @maybe_ref) %></li>
-      </ul>
-    </div><!--/.navbar-collapse -->
-  </div>
-</header>
+  </header>
 
-<div class="container">
-    <% if privileged_access? %>
-        <form class="form-inline" role="form" method="GET">
-          <div class="form-group">
-            <label for="releaseSelector">See this website: </label>
-          </div>
-          <div class="form-group">
-            <select id="releaseSelector" name="ref" onchange="this.form.submit()" class="form-control">
-              <% if !api.refs.map{|_,r| r.ref }.include?(@ref) %>
-                <option>?</option>
-              <% end %>
-              <option value="" <% if @ref == api.master %>selected="selected"<% end %>>As currently seen by guest visitors</option>
-              <optgroup label="Or preview the website in a future release:">
-                <% api.refs.reject{|_,r| r.master? }.each do |_, ref| %>
-                  <option value="<%= ref.ref %>" <% if @ref == ref.ref %>selected="selected"<% end %>>
-                    As <%= ref.label %> <%= ref.scheduled_at && ref.scheduled_at.strftime("%Y-%m-%d") %>
-                  </option>
+  <div class="container">
+      <% if privileged_access? %>
+          <form class="form-inline" role="form" method="GET">
+            <div class="form-group">
+              <label for="releaseSelector">See this website: </label>
+            </div>
+            <div class="form-group">
+              <select id="releaseSelector" name="ref" onchange="this.form.submit()" class="form-control">
+                <% if !api.refs.map{|_,r| r.ref }.include?(@ref) %>
+                  <option>?</option>
                 <% end %>
-              </optgroup>
-            </select>
-          </div>
-        </form>
-    <% end %>
+                <option value="" <% if @ref == api.master %>selected="selected"<% end %>>As currently seen by guest visitors</option>
+                <optgroup label="Or preview the website in a future release:">
+                  <% api.refs.reject{|_,r| r.master? }.each do |_, ref| %>
+                    <option value="<%= ref.ref %>" <% if @ref == ref.ref %>selected="selected"<% end %>>
+                      As <%= ref.label %> <%= ref.scheduled_at && ref.scheduled_at.strftime("%Y-%m-%d") %>
+                    </option>
+                  <% end %>
+                </optgroup>
+              </select>
+            </div>
+          </form>
+      <% end %>
+  </div>
+
+    <%= yield %>
+
+  <div class="footer-container">
+    <footer class="container">
+    <p>WorldChanger is an example website to be used freely on top of the <a href="http://prismic.io">prismic.io</a> writing-room and content query API.</p>
+    <p>
+      <% if connected? %>
+        <%= link_to signout_path do %>Sign out<% end %>
+      <% else %>
+        <%= link_to signin_path do %>Sign in to preview changes<% end %>
+      <% end %>
+    </p>
+    </footer>
+  </div>
+
 </div>
-
-  <%= yield %>
-
-<div class="footer-container">
-  <footer class="container">
-  <p>WorldChanger is an example website to be used freely on top of the <a href="http://prismic.io">prismic.io</a> writing-room and content query API.</p>
-  <p>
-    <% if connected? %>
-      <%= link_to signout_path do %>Sign out<% end %>
-    <% else %>
-      <%= link_to signin_path do %>Sign in to preview changes<% end %>
-    <% end %>
-  </p>
-  </footer>
-</div>
-
 </body>
 </html>
