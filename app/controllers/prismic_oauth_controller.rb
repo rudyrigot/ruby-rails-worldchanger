@@ -9,6 +9,7 @@ class PrismicOauthController < ApplicationController
 
   def signin
     url = PrismicService.oauth_initiate_url(access_token,
+    {
       client_id: PrismicService.config("client_id"),
       redirect_uri: get_callback_url,
       scope: "master+releases"
