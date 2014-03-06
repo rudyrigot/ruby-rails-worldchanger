@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :set_blog_categories, only: [:blog, :blogcategory, :blogpost, :blogsearch]
 
   # Rescue OAuth errors for some actions
   rescue_from Prismic::API::PrismicWSAuthError, with: :redirect_to_signin,
@@ -60,14 +59,6 @@ class ApplicationController < ActionController::Base
 
   def blog
     @documents = api.form("blog")
-                    .orderings("[my.blog.date desc]")
-                    .submit(ref)
-    render :bloglist
-  end
-
-  def blogcategory
-    @documents = api.form("blog")
-                    .query(%([[:d = at(my.blog.category, "#{params[:slug]}")]]))
                     .orderings("[my.blog.date desc]")
                     .submit(ref)
     render :bloglist
@@ -145,12 +136,6 @@ class ApplicationController < ActionController::Base
       logger.info("Minimum requirements to display the minimum price are not met (is there any plan published right now?)")
       @minimum_price = 0
     end
-  end
-
-  # Before_action
-
-  def set_blog_categories
-    @blog_categories = PrismicService.config('blog_categories')
   end
 
   # Easier access and initialization of the Prismic::API object.

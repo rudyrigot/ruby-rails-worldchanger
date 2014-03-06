@@ -72,7 +72,6 @@ StarterRubyRails::Application.routes.draw do
 
   # # Blog lists
   get '/blog' => 'application#blog'
-  get '/blog/category/:slug' => 'application#blogcategory', as: :blog_category
 
     # # Basic search
   get '/blog/search', to: 'application#blogsearch', as: :blog_search

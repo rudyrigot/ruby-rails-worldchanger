@@ -540,7 +540,7 @@ article#about .title {
 	margin: 0 auto;
 	overflow: hidden;
 	border: 1px solid #F1F2F5;
-} 
+}
 
 /* FAQ */
 article#faq #accordion {
@@ -551,18 +551,9 @@ article#faq #accordion {
 #blog-nav {
 	margin-bottom: 50px;
 }
-#blog-nav .blog-tags,
 #blog-nav .blog-search {
 	margin-top: 20px;
 	text-align: right;
-}
-#blog-nav .dropdown {
-	margin-top: 20px;
-}
-#blog-nav .blog-tags label {
-	margin-right: 10px;
-	font-weight: normal;
-	font-style: italic;
 }
 
 /* Blog list */
