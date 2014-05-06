@@ -27,9 +27,12 @@ class ApplicationController < ActionController::Base
     @document = PrismicService.get_document(api.bookmark("tour"), api, ref)
     @arguments = api.form("arguments")
                     .orderings("[my.argument.priority desc]")
-                    .submit(ref)
+                    .submit(ref).results
     @homepage = PrismicService.get_document(api.bookmark("homepage"), api, ref)
     set_minimum_price
+    @argument_photo = @arguments.select{ |argument| argument['argument.photo']}.at(0)
+    @argument_panorama_photo = @arguments.select{ |argument| argument['argument.panoramaphoto']}.at(0)
+    @arguments.delete_if { |argument| argument['argument.photo'] || argument['argument.panoramaphoto'] }
   end
 
   def pricing
