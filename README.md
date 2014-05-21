@@ -15,7 +15,7 @@ Then, configure the project as described in the "Configure" paragraph of [the st
 Now, you can change content in your WorldChanger repository, and it will reflect in your local project.
 
 
-### Licence
+### License
 
 This software is licensed under the Apache 2 license, quoted below.
 
