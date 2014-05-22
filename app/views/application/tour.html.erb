@@ -9,103 +9,74 @@
 
 	</div>
 
-	<%#
-		This will allow us to know where we're at compared to previous arguments,
-		and do stuff like "if we're right after the large-bright-image argument, then"
-	%>
-	<% stage = :init %>
-
-	<% @arguments.each do |argument| %>
-
-		<% if stage == :init && argument['argument.photo'] %>
-			<%# A photo is there: this is the "large-bright-image" case %>
-			<div id="<%= argument.id %>" class="large-image large-bright-image container">
-				<style type="text/css">
-					#<%= argument.id %> {background-image: url('<%= argument['argument.photo'].get_view('large').url %>')}
-					@media (max-width: 992px) {
-						#<%= argument.id %> {background-image: url('<%= argument['argument.photo'].get_view('medium').url %>')}
-					}
-					@media (max-width: 500px) {
-						#<%= argument.id %> {background-image: url('<%= argument['argument.photo'].get_view('small').url %>')}
-					}
-				</style>
-				<div class="row">
-					<div class="col-sm-5 col-sm-offset-7">
-						<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
-						<%= argument['argument.catcher_description'] ? argument['argument.catcher_description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-					</div>
+	<%# The photo argument %>
+	<% if @argument_photo %>
+		<div id="<%= @argument_photo.id %>" class="large-image large-bright-image container">
+			<style type="text/css">
+				#<%= @argument_photo.id %> {background-image: url('<%= @argument_photo['argument.photo'].get_view('large').url %>')}
+				@media (max-width: 992px) {
+					#<%= @argument_photo.id %> {background-image: url('<%= @argument_photo['argument.photo'].get_view('medium').url %>')}
+				}
+				@media (max-width: 500px) {
+					#<%= @argument_photo.id %> {background-image: url('<%= @argument_photo['argument.photo'].get_view('small').url %>')}
+				}
+			</style>
+			<div class="row">
+				<div class="col-sm-5 col-sm-offset-7">
+					<h2><%= @argument_photo['argument.title'] ? @argument_photo['argument.title'].as_text : '' %></h2>
+					<%= @argument_photo['argument.catcher_description'] ? @argument_photo['argument.catcher_description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 				</div>
 			</div>
-			<% stage = :right_after_large_bright_image %>
+		</div>
+	<% end %>
 
-		<% elsif stage == :right_after_large_bright_image || stage == :one_after_large_bright_image %>
-
-			<%# The two next arguments after the "large-bright-image" case %>
-
-			<% if stage == :right_after_large_bright_image %>
-				<div class="container"><div class="row">
-			<% end %>
-
+	<%# The two next arguments after the photo argument %>
+	<div class="container"><div class="row">
+		<% for argument in (@arguments[0..1] || []) %>
 			<div id="<%= argument.id %>" class="half-regular col-sm-5 col-sm-offset-1">
 				<img class="icon" src="<%= argument['argument.icon'] && argument['argument.icon'].get_view('small') ? argument['argument.icon'].get_view('small').url : '' %>">
 				<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
 				<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 			</div>
+		<% end %>
+	</div></div>
 
-			<% if stage == :one_after_large_bright_image %>
-				</div></div>
-			<% end %>
-			<% stage = :init if stage == :one_after_large_bright_image %>
-			<% stage = :one_after_large_bright_image if stage == :right_after_large_bright_image %>
-
-		<% elsif stage == :init && argument['argument.panoramaphoto'] %>
-			<%# A photo is there: this is the "large-dark-image" case %>
-			<div id="<%= argument.id %>" class="large-image large-dark-image">
-				<style type="text/css">
-					#<%= argument.id %> {background-image: url('<%= argument['argument.panoramaphoto'].get_view('large').url %>')}
-					@media (max-width: 992px) {
-						#<%= argument.id %> {background-image: url('<%= argument['argument.panoramaphoto'].get_view('medium').url %>')}
-					}
-					@media (max-width: 500px) {
-						#<%= argument.id %> {background-image: url('<%= argument['argument.panoramaphoto'].get_view('small').url %>')}
-					}
-				</style>
-				<div class="container">
-					<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
-					<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-				</div>
+	<%# The panorama photo argument %>
+	<% if @argument_panorama_photo %>
+		<div id="<%= @argument_panorama_photo.id %>" class="large-image large-dark-image">
+			<style type="text/css">
+				#<%= @argument_panorama_photo.id %> {background-image: url('<%= @argument_panorama_photo['argument.panoramaphoto'].get_view('large').url %>')}
+				@media (max-width: 992px) {
+					#<%= @argument_panorama_photo.id %> {background-image: url('<%= @argument_panorama_photo['argument.panoramaphoto'].get_view('medium').url %>')}
+				}
+				@media (max-width: 500px) {
+					#<%= @argument_panorama_photo.id %> {background-image: url('<%= @argument_panorama_photo['argument.panoramaphoto'].get_view('small').url %>')}
+				}
+			</style>
+			<div class="container">
+				<h2><%= @argument_panorama_photo['argument.title'] ? @argument_panorama_photo['argument.title'].as_text : '' %></h2>
+				<%= @argument_panorama_photo['argument.description'] ? @argument_panorama_photo['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 			</div>
-			<% stage = :right_after_large_dark_image %>
+		</div>
+	<% end %>
 
-		<% elsif stage == :right_after_large_dark_image || stage == :one_after_large_dark_image %>
-
-			<%# The two next arguments after the "large-bright-image" case %>
-
-			<% if stage == :right_after_large_dark_image %>
-				<div class="container"><div class="row regular-panels">
-			<% end %>
-
+	<%# The two next arguments after the panorama photo argument %>
+	<div class="container"><div class="row regular-panels">
+		<% for argument in (@arguments[2..3] || []) %>
 			<div id="<%= argument.id %>" class="regular-panel col-sm-6">
 				<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
 				<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 			</div>
-
-			<% if stage == :one_after_large_dark_image %>
-				</div></div>
-			<% end %>
-			<% stage = :init if stage == :one_after_large_dark_image %>
-			<% stage = :one_after_large_dark_image if stage == :right_after_large_dark_image %>
-
-		<% else %>
-			<%# Other cases %>
-			<div id="<%= argument.id %>" class="container regular" style="background-image: url('<%= argument['argument.icon'] && argument['argument.icon'].get_view('small') ? argument['argument.icon'].get_view('small').url : '' %>')">
-				<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
-				<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-			</div>
 		<% end %>
+	</div></div>
 
+	<%# Other arguments %>
+	<% for argument in (@arguments[4..-1] || []) %>
+		<div id="<%= argument.id %>" class="container regular" style="background-image: url('<%= argument['argument.icon'] && argument['argument.icon'].get_view('small') ? argument['argument.icon'].get_view('small').url : '' %>')">
+			<h2><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h2>
+			<%= argument['argument.description'] ? argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+		</div>
 	<% end %>
-
 
 	<%= render partial: "minimumplans", locals: { homepage: @homepage } %>
 
